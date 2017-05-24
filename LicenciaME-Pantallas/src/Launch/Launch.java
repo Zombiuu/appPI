@@ -32,6 +32,7 @@ public class Launch {
 		
 		vistaPrincipal.onLoadTable();
 		vistaPrincipal.setVisible(true);
+		
 
 	}
 }
