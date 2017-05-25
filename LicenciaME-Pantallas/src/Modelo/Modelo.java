@@ -173,7 +173,10 @@ public class Modelo {
 	public ArrayList<Modelo> getInscripcionesList() {
 		ArrayList<Modelo> inscripcionesList = new ArrayList<Modelo>();
 		Connection connection = getConnection();
-		String query = "SELECT * FROM `solicitud`";
+		
+		// HAY QUE QUITAR LOS LEFT JOIN 
+		
+		String query = "SELECT id_solicitud, persona.cif as cif, solicitud.desc_actividad as nombre, solicitud.tipo as tipoActividad, solicitud.fecha_inicio as fecha, solicitud.estado as estado FROM `solicitud` LEFT JOIN titularidad ON titularidad.solicitud = solicitud.id_solicitud LEFT JOIN persona ON titularidad.persona = persona.id_persona";
 		Statement st;
 		ResultSet rs;
 		try {
@@ -181,7 +184,7 @@ public class Modelo {
 			rs = st.executeQuery(query);
 			Modelo database;
 			while (rs.next()) {
-				database = new Modelo(rs.getInt("id_actividad"), rs.getInt("cif"), rs.getString("nombre"),
+				database = new Modelo(rs.getInt("id_solicitud"), rs.getInt("cif"), rs.getString("nombre"),
 						rs.getString("tipoActividad"), rs.getString("fecha"), rs.getString("estado"));
 				inscripcionesList.add(database);
 			}
@@ -196,10 +199,7 @@ public class Modelo {
 			String cp, String fax, String movil) {
 		Connection con = getConnection();
 		PreparedStatement ps;
-//		String query = "INSERT INTO `actividad`(`cif`, `nombre`, `tipoActividad`, `fecha`, `estado`) VALUES ('"
-//				+ vistaInscripcion.getTxtDNI() + "','" + vistaInscripcion.getTxtDescrAct().getText() + "','"
-//				+ vistaInscripcion.getComboTipo() + "','" + vistaInscripcion.getLocalDate() + "','" + "En proceso"
-//				+ "')";
+
 		String query="INSERT INTO `representante`(`nif_nie`, `nombre`, `direccion`, `municipio`, `cp`, `tlf_fijo`, `tlf_movil`) VALUES (?,?,?,?,?,?,?)";
 		try {
 			ps = con.prepareStatement(query);

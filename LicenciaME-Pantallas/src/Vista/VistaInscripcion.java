@@ -200,26 +200,41 @@ public class VistaInscripcion extends JFrame {
 																																
 																																		JLabel lblCambiosTitu = new JLabel("Solo cambios titularidad");
 																																		GroupLayout gl_panelDocGen = new GroupLayout(panelDocGen);
-																																		gl_panelDocGen.setHorizontalGroup(gl_panelDocGen.createParallelGroup(Alignment.LEADING).addGroup(gl_panelDocGen
-																																				.createSequentialGroup().addContainerGap()
-																																				.addGroup(gl_panelDocGen.createParallelGroup(Alignment.LEADING).addGroup(gl_panelDocGen
-																																						.createSequentialGroup().addComponent(chckbxFotocopiaDNI).addPreferredGap(ComponentPlacement.RELATED)
-																																						.addComponent(chckbxEscritura).addPreferredGap(ComponentPlacement.RELATED)
-																																						.addComponent(chckbxJustificantePago).addPreferredGap(ComponentPlacement.RELATED)
-																																						.addComponent(chckbxFotocopiaImpuestoActividades, GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE))
-																																						.addComponent(lblCambiosTitu, GroupLayout.PREFERRED_SIZE, 158, GroupLayout.PREFERRED_SIZE)
-																																						.addComponent(chckbxPropiedad, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 476,
-																																								Short.MAX_VALUE)
-																																						.addComponent(lblDocGen, GroupLayout.PREFERRED_SIZE, 145, GroupLayout.PREFERRED_SIZE))
-																																				.addGap(328)));
-																																		gl_panelDocGen.setVerticalGroup(gl_panelDocGen.createParallelGroup(Alignment.LEADING)
-																																				.addGroup(gl_panelDocGen.createSequentialGroup().addContainerGap().addComponent(lblDocGen)
-																																						.addPreferredGap(ComponentPlacement.RELATED)
-																																						.addGroup(gl_panelDocGen.createParallelGroup(Alignment.BASELINE).addComponent(chckbxFotocopiaDNI)
-																																								.addComponent(chckbxEscritura).addComponent(chckbxJustificantePago)
-																																								.addComponent(chckbxFotocopiaImpuestoActividades))
-																																						.addGap(3).addComponent(lblCambiosTitu).addPreferredGap(ComponentPlacement.RELATED)
-																																						.addComponent(chckbxPropiedad).addGap(17)));
+																																		gl_panelDocGen.setHorizontalGroup(
+																																			gl_panelDocGen.createParallelGroup(Alignment.LEADING)
+																																				.addGroup(gl_panelDocGen.createSequentialGroup()
+																																					.addContainerGap()
+																																					.addGroup(gl_panelDocGen.createParallelGroup(Alignment.LEADING)
+																																						.addGroup(gl_panelDocGen.createSequentialGroup()
+																																							.addComponent(chckbxFotocopiaDNI)
+																																							.addPreferredGap(ComponentPlacement.RELATED)
+																																							.addComponent(chckbxEscritura)
+																																							.addPreferredGap(ComponentPlacement.RELATED)
+																																							.addComponent(chckbxJustificantePago)
+																																							.addPreferredGap(ComponentPlacement.RELATED)
+																																							.addComponent(chckbxFotocopiaImpuestoActividades, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+																																						.addComponent(chckbxPropiedad, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 492, Short.MAX_VALUE)
+																																						.addComponent(lblDocGen, GroupLayout.PREFERRED_SIZE, 145, GroupLayout.PREFERRED_SIZE)
+																																						.addComponent(lblCambiosTitu, GroupLayout.DEFAULT_SIZE, 492, Short.MAX_VALUE))
+																																					.addGap(328))
+																																		);
+																																		gl_panelDocGen.setVerticalGroup(
+																																			gl_panelDocGen.createParallelGroup(Alignment.LEADING)
+																																				.addGroup(gl_panelDocGen.createSequentialGroup()
+																																					.addContainerGap()
+																																					.addComponent(lblDocGen)
+																																					.addPreferredGap(ComponentPlacement.RELATED)
+																																					.addGroup(gl_panelDocGen.createParallelGroup(Alignment.BASELINE)
+																																						.addComponent(chckbxFotocopiaDNI)
+																																						.addComponent(chckbxEscritura)
+																																						.addComponent(chckbxJustificantePago)
+																																						.addComponent(chckbxFotocopiaImpuestoActividades))
+																																					.addGap(3)
+																																					.addComponent(lblCambiosTitu)
+																																					.addPreferredGap(ComponentPlacement.RELATED)
+																																					.addComponent(chckbxPropiedad)
+																																					.addGap(17))
+																																		);
 																																		panelDocGen.setLayout(gl_panelDocGen);
 																																		panelDoc.setLayout(gl_panelDoc);
 		
@@ -317,7 +332,7 @@ public class VistaInscripcion extends JFrame {
 					.addContainerGap(40, Short.MAX_VALUE)
 					.addComponent(panelDoc, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap())
-				.addGroup(gl_panel.createSequentialGroup()
+				.addGroup(Alignment.LEADING, gl_panel.createSequentialGroup()
 					.addGap(40)
 					.addComponent(panelLocal, 0, 0, Short.MAX_VALUE)
 					.addContainerGap())
@@ -326,8 +341,8 @@ public class VistaInscripcion extends JFrame {
 			gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(panelLocal, GroupLayout.PREFERRED_SIZE, 175, GroupLayout.PREFERRED_SIZE)
-					.addGap(28)
+					.addComponent(panelLocal, GroupLayout.PREFERRED_SIZE, 160, GroupLayout.PREFERRED_SIZE)
+					.addGap(43)
 					.addComponent(panelDoc, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
