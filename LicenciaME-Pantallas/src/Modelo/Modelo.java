@@ -159,8 +159,8 @@ public class Modelo {
 				DefaultTableModel model = (DefaultTableModel) vistaPrincipal.getTablaInfo();
 				model.setRowCount(0);
 				ShowJTable();
-				JOptionPane.showMessageDialog(null, "Información almacenada satisfactoriamente");
 				vistaInscripcion.dispose();
+				JOptionPane.showMessageDialog(null, "Información almacenada satisfactoriamente");
 			} else {
 				JOptionPane.showMessageDialog(null, "La información no pudo ser almacenada");
 			}

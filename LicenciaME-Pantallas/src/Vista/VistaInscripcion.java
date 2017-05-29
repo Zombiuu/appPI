@@ -303,7 +303,7 @@ public class VistaInscripcion extends JFrame {
 					public void actionPerformed(ActionEvent e) {
 						controlador.InsertSolicitud();
 						controlador.InsertPersona();
-						if(chckbxRequired.isSelected()){
+						if(getChckbxRequired().isSelected()){
 							
 							controlador.InsertRepresentante();
 						}
@@ -506,8 +506,8 @@ public class VistaInscripcion extends JFrame {
 		panelRepresentante.setLayout(gl_panelRepresentante);
 		contentPane.setLayout(null);
 
-		chckbxRequired = new JCheckBox("Requiere representante");
-		chckbxRequired.setBackground(SystemColor.inactiveCaption);
+		setChckbxRequired(new JCheckBox("Requiere representante"));
+		getChckbxRequired().setBackground(SystemColor.inactiveCaption);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new TitledBorder(null, "Fecha", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -520,7 +520,7 @@ public class VistaInscripcion extends JFrame {
 						.addComponent(panelRepresentante, Alignment.LEADING, 0, 0, Short.MAX_VALUE)
 						.addComponent(panel_1, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 523, Short.MAX_VALUE)
 						.addGroup(Alignment.LEADING, gl_panelBorde.createParallelGroup(Alignment.LEADING, false)
-							.addComponent(chckbxRequired, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addComponent(getChckbxRequired(), GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 							.addComponent(panelInteresado, GroupLayout.DEFAULT_SIZE, 523, Short.MAX_VALUE)))
 					.addGap(33))
 		);
@@ -532,7 +532,7 @@ public class VistaInscripcion extends JFrame {
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(panelInteresado, GroupLayout.PREFERRED_SIZE, 175, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(chckbxRequired)
+					.addComponent(getChckbxRequired())
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(panelRepresentante, GroupLayout.PREFERRED_SIZE, 173, GroupLayout.PREFERRED_SIZE)
 					.addGap(46))
@@ -690,9 +690,9 @@ public class VistaInscripcion extends JFrame {
 		contentPane.add(panelBorde);
 		contentPane.add(panel);
 
-		chckbxRequired.addActionListener(new ActionListener() {
+		getChckbxRequired().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (chckbxRequired.isSelected()) {
+				if (getChckbxRequired().isSelected()) {
 					controlador.enableComponents(panelRepresentante, true);
 				} else {
 					controlador.enableComponents(panelRepresentante, false);
@@ -930,5 +930,15 @@ public class VistaInscripcion extends JFrame {
 
 	public void setModelo(Modelo modelo) {
 		this.modelo = modelo;
+	}
+
+
+	public JCheckBox getChckbxRequired() {
+		return chckbxRequired;
+	}
+
+
+	public void setChckbxRequired(JCheckBox chckbxRequired) {
+		this.chckbxRequired = chckbxRequired;
 	}
 }

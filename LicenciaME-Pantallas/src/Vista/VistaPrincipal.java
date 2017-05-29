@@ -25,6 +25,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.RowFilter;
 import javax.swing.UIManager;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
@@ -33,6 +34,7 @@ import javax.swing.border.SoftBevelBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 import com.toedter.calendar.JDateChooser;
 
@@ -41,15 +43,19 @@ import Modelo.Modelo;
 import javax.swing.ImageIcon;
 import java.awt.SystemColor;
 import javax.swing.SwingConstants;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class VistaPrincipal extends JFrame {
 	private JPanel contentPane;
 	private JTable TablaInfo;
-	private JTextField nRegistro;
-	private JTextField textField_3;
+	private JTextField txtnRegistro;
+	private JTextField txtDNI;
 	private Controlador controlador;
 	private Modelo modelo;
-
+	private TableRowSorter trOrden;
+	private JComboBox tipo;
+	private JComboBox comboBox;
 	/**
 	 * Create the frame.
 	 */
@@ -137,98 +143,109 @@ public class VistaPrincipal extends JFrame {
 		JLabel lblNewLabel_4 = new JLabel("Informaci\u00F3n adicional");
 		lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		GroupLayout gl_Descripcion = new GroupLayout(Descripcion);
-		gl_Descripcion.setHorizontalGroup(
-			gl_Descripcion.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_Descripcion.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_Descripcion.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_Descripcion.createSequentialGroup()
-							.addComponent(lblNewLabel_4, GroupLayout.DEFAULT_SIZE, 437, Short.MAX_VALUE)
-							.addContainerGap())
-						.addGroup(gl_Descripcion.createSequentialGroup()
-							.addComponent(separator_1, GroupLayout.DEFAULT_SIZE, 437, Short.MAX_VALUE)
-							.addContainerGap())
-						.addGroup(gl_Descripcion.createSequentialGroup()
-							.addGroup(gl_Descripcion.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_Descripcion.createSequentialGroup()
-									.addComponent(lblDocumentacinAportada, GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
-									.addGap(298))
-								.addComponent(separator, GroupLayout.DEFAULT_SIZE, 437, Short.MAX_VALUE)
-								.addGroup(gl_Descripcion.createSequentialGroup()
-									.addGroup(gl_Descripcion.createParallelGroup(Alignment.LEADING)
+		gl_Descripcion
+				.setHorizontalGroup(gl_Descripcion.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_Descripcion.createSequentialGroup().addContainerGap().addGroup(gl_Descripcion
+								.createParallelGroup(Alignment.LEADING).addGroup(gl_Descripcion.createSequentialGroup()
+										.addComponent(lblNewLabel_4, GroupLayout.DEFAULT_SIZE, 437,
+												Short.MAX_VALUE)
+										.addContainerGap())
+								.addGroup(
+										gl_Descripcion.createSequentialGroup()
+												.addComponent(separator_1, GroupLayout.DEFAULT_SIZE, 437,
+														Short.MAX_VALUE)
+												.addContainerGap())
+								.addGroup(gl_Descripcion.createSequentialGroup().addGroup(gl_Descripcion
+										.createParallelGroup(Alignment.LEADING)
 										.addGroup(gl_Descripcion.createSequentialGroup()
-											.addComponent(chckbxNewCheckBox, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-											.addPreferredGap(ComponentPlacement.RELATED)
-											.addComponent(chckbxJustificanteDePago, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-										.addComponent(checkBox, GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE))
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addGroup(gl_Descripcion.createParallelGroup(Alignment.LEADING, false)
-										.addComponent(chckbxFotocopiaEscrituras, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-										.addComponent(chckbxOtrasAutorizaciones, GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)))
-								.addGroup(gl_Descripcion.createSequentialGroup()
-									.addGroup(gl_Descripcion.createParallelGroup(Alignment.TRAILING)
-										.addComponent(lblFechaDeSolicitud, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
-										.addComponent(dateChooser_2, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE))
-									.addGroup(gl_Descripcion.createParallelGroup(Alignment.LEADING)
+												.addComponent(lblDocumentacinAportada, GroupLayout.DEFAULT_SIZE, 139,
+														Short.MAX_VALUE)
+												.addGap(298))
+										.addComponent(separator, GroupLayout.DEFAULT_SIZE, 437, Short.MAX_VALUE)
+										.addGroup(gl_Descripcion.createSequentialGroup().addGroup(gl_Descripcion
+												.createParallelGroup(Alignment.LEADING)
+												.addGroup(gl_Descripcion.createSequentialGroup()
+														.addComponent(chckbxNewCheckBox, GroupLayout.DEFAULT_SIZE,
+																GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+														.addPreferredGap(ComponentPlacement.RELATED).addComponent(
+																chckbxJustificanteDePago, GroupLayout.DEFAULT_SIZE,
+																GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+												.addComponent(checkBox, GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE))
+												.addPreferredGap(ComponentPlacement.RELATED)
+												.addGroup(gl_Descripcion.createParallelGroup(Alignment.LEADING, false)
+														.addComponent(chckbxFotocopiaEscrituras,
+																GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,
+																Short.MAX_VALUE)
+														.addComponent(chckbxOtrasAutorizaciones,
+																GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)))
 										.addGroup(gl_Descripcion.createSequentialGroup()
-											.addGap(18)
-											.addComponent(dateChooser_3, GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
-											.addGap(94))
-										.addGroup(gl_Descripcion.createSequentialGroup()
-											.addGap(21)
-											.addComponent(lblFechaPrevistaActividad, GroupLayout.DEFAULT_SIZE, 253, Short.MAX_VALUE)
-											.addPreferredGap(ComponentPlacement.RELATED)))))
-							.addGap(10))
-						.addGroup(gl_Descripcion.createSequentialGroup()
-							.addComponent(lblRaznSocial, GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
-							.addGap(289))
-						.addGroup(gl_Descripcion.createSequentialGroup()
-							.addComponent(lblNewLabel_1)
-							.addContainerGap(401, Short.MAX_VALUE))))
-		);
-		gl_Descripcion.setVerticalGroup(
-			gl_Descripcion.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_Descripcion.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(lblNewLabel_4)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(lblRaznSocial, GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(lblNewLabel_1)
-					.addGap(35)
-					.addComponent(lblDocumentacinAportada, GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_Descripcion.createParallelGroup(Alignment.BASELINE)
-						.addComponent(chckbxNewCheckBox, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(chckbxJustificanteDePago, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(chckbxFotocopiaEscrituras, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_Descripcion.createParallelGroup(Alignment.BASELINE)
-						.addComponent(checkBox, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(chckbxOtrasAutorizaciones, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-					.addGap(9)
-					.addComponent(separator, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_Descripcion.createParallelGroup(Alignment.BASELINE)
+												.addGroup(gl_Descripcion.createParallelGroup(Alignment.TRAILING)
+														.addComponent(lblFechaDeSolicitud, Alignment.LEADING,
+																GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
+														.addComponent(dateChooser_2, Alignment.LEADING,
+																GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE))
+												.addGroup(gl_Descripcion.createParallelGroup(Alignment.LEADING)
+														.addGroup(gl_Descripcion.createSequentialGroup().addGap(18)
+																.addComponent(dateChooser_3, GroupLayout.DEFAULT_SIZE,
+																		162, Short.MAX_VALUE)
+																.addGap(94))
+														.addGroup(gl_Descripcion.createSequentialGroup().addGap(21)
+																.addComponent(lblFechaPrevistaActividad,
+																		GroupLayout.DEFAULT_SIZE, 253, Short.MAX_VALUE)
+																.addPreferredGap(ComponentPlacement.RELATED)))))
+										.addGap(10))
+								.addGroup(
+										gl_Descripcion.createSequentialGroup()
+												.addComponent(lblRaznSocial, GroupLayout.DEFAULT_SIZE, 158,
+														Short.MAX_VALUE)
+												.addGap(289))
+								.addGroup(gl_Descripcion.createSequentialGroup().addComponent(lblNewLabel_1)
+										.addContainerGap(401, Short.MAX_VALUE)))));
+		gl_Descripcion.setVerticalGroup(gl_Descripcion.createParallelGroup(Alignment.LEADING).addGroup(gl_Descripcion
+				.createSequentialGroup().addContainerGap().addComponent(lblNewLabel_4)
+				.addPreferredGap(ComponentPlacement.RELATED)
+				.addComponent(lblRaznSocial, GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
+				.addPreferredGap(ComponentPlacement.RELATED).addComponent(lblNewLabel_1).addGap(35)
+				.addComponent(lblDocumentacinAportada, GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
+				.addPreferredGap(ComponentPlacement.RELATED)
+				.addGroup(gl_Descripcion.createParallelGroup(Alignment.BASELINE)
+						.addComponent(chckbxNewCheckBox, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,
+								Short.MAX_VALUE)
+						.addComponent(chckbxJustificanteDePago, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,
+								Short.MAX_VALUE)
+						.addComponent(chckbxFotocopiaEscrituras, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,
+								Short.MAX_VALUE))
+				.addPreferredGap(ComponentPlacement.RELATED)
+				.addGroup(
+						gl_Descripcion.createParallelGroup(Alignment.BASELINE)
+								.addComponent(checkBox, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,
+										Short.MAX_VALUE)
+								.addComponent(chckbxOtrasAutorizaciones, GroupLayout.DEFAULT_SIZE,
+										GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+				.addGap(9)
+				.addComponent(separator, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+						GroupLayout.PREFERRED_SIZE)
+				.addPreferredGap(ComponentPlacement.RELATED)
+				.addGroup(gl_Descripcion.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblFechaDeSolicitud, GroupLayout.DEFAULT_SIZE, 17, Short.MAX_VALUE)
 						.addComponent(lblFechaPrevistaActividad, GroupLayout.DEFAULT_SIZE, 17, Short.MAX_VALUE))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_Descripcion.createParallelGroup(Alignment.LEADING, false)
-						.addComponent(dateChooser_3, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(dateChooser_2, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-					.addPreferredGap(ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
-					.addComponent(separator_1, GroupLayout.PREFERRED_SIZE, 7, GroupLayout.PREFERRED_SIZE)
-					.addGap(32))
-		);
+				.addPreferredGap(ComponentPlacement.RELATED)
+				.addGroup(gl_Descripcion.createParallelGroup(Alignment.LEADING, false)
+						.addComponent(dateChooser_3, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,
+								Short.MAX_VALUE)
+						.addComponent(dateChooser_2, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,
+								Short.MAX_VALUE))
+				.addPreferredGap(ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+				.addComponent(separator_1, GroupLayout.PREFERRED_SIZE, 7, GroupLayout.PREFERRED_SIZE).addGap(32)));
 		Descripcion.setLayout(gl_Descripcion);
 
 		JButton btnAlta = new JButton("Solicitud Licencia");
-		btnAlta.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
+		btnAlta.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
 				controlador.abrirVentanaInscripcion();
 			}
 		});
+
 		btnAlta.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
 		JButton btnArchivar = new JButton("Archivar Licencia");
@@ -315,9 +332,9 @@ public class VistaPrincipal extends JFrame {
 		btnBusqueda.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
 		JButton btnReset = new JButton("Limpiar b\u00FAsqueda");
-		btnReset.setEnabled(false);
 		btnReset.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				controlador.MostrarTabla();
 			}
 		});
 		btnReset.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -329,38 +346,33 @@ public class VistaPrincipal extends JFrame {
 		JLabel lblNewLabel_3 = new JLabel("Buscador");
 		lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		GroupLayout gl_Main = new GroupLayout(Main);
-		gl_Main.setHorizontalGroup(
-			gl_Main.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_Main.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_Main.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_Main.createSequentialGroup()
-							.addPreferredGap(ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
-							.addGroup(gl_Main.createParallelGroup(Alignment.TRAILING, false)
-								.addComponent(panelLicencia, GroupLayout.PREFERRED_SIZE, 738, GroupLayout.PREFERRED_SIZE)
+		gl_Main.setHorizontalGroup(gl_Main.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_Main.createSequentialGroup().addContainerGap()
+						.addGroup(gl_Main.createParallelGroup(Alignment.LEADING)
 								.addGroup(gl_Main.createSequentialGroup()
-									.addComponent(btnBusqueda, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(btnReset, GroupLayout.PREFERRED_SIZE, 153, GroupLayout.PREFERRED_SIZE)
-									.addGap(497)))
-							.addGap(28))
-						.addGroup(gl_Main.createSequentialGroup()
-							.addComponent(lblNewLabel_3)
-							.addContainerGap(702, Short.MAX_VALUE))))
-		);
-		gl_Main.setVerticalGroup(
-			gl_Main.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_Main.createSequentialGroup()
-					.addGap(19)
-					.addComponent(lblNewLabel_3)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(panelLicencia, GroupLayout.PREFERRED_SIZE, 168, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_Main.createParallelGroup(Alignment.BASELINE)
+										.addPreferredGap(ComponentPlacement.RELATED, 8, Short.MAX_VALUE).addGroup(
+												gl_Main.createParallelGroup(Alignment.TRAILING, false)
+														.addComponent(panelLicencia, GroupLayout.PREFERRED_SIZE, 738,
+																GroupLayout.PREFERRED_SIZE)
+														.addGroup(gl_Main.createSequentialGroup()
+																.addComponent(btnBusqueda, GroupLayout.DEFAULT_SIZE,
+																		GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+																.addPreferredGap(ComponentPlacement.RELATED)
+																.addComponent(btnReset, GroupLayout.PREFERRED_SIZE, 153,
+																		GroupLayout.PREFERRED_SIZE)
+																.addGap(497)))
+										.addGap(28))
+								.addGroup(gl_Main.createSequentialGroup().addComponent(lblNewLabel_3)
+										.addContainerGap(702, Short.MAX_VALUE)))));
+		gl_Main.setVerticalGroup(gl_Main.createParallelGroup(Alignment.TRAILING).addGroup(gl_Main
+				.createSequentialGroup().addGap(19).addComponent(lblNewLabel_3)
+				.addPreferredGap(ComponentPlacement.UNRELATED)
+				.addComponent(panelLicencia, GroupLayout.PREFERRED_SIZE, 168, GroupLayout.PREFERRED_SIZE)
+				.addPreferredGap(ComponentPlacement.RELATED)
+				.addGroup(gl_Main.createParallelGroup(Alignment.BASELINE)
 						.addComponent(btnBusqueda, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 						.addComponent(btnReset, GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE))
-					.addContainerGap())
-		);
+				.addContainerGap()));
 
 		JLabel tipoLabel = new JLabel("Tipo de Licencia");
 		tipoLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -368,17 +380,63 @@ public class VistaPrincipal extends JFrame {
 		JLabel registroLabel = new JLabel("N\u00BA de Registro de Licencia");
 		registroLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
-		nRegistro = new JTextField();
-		nRegistro.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		nRegistro.setColumns(10);
+		txtnRegistro = new JTextField();
+		txtnRegistro.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent arg0) {
+				txtnRegistro.addKeyListener(new KeyAdapter() {
+					public void keyReleased(final KeyEvent arg0) {
 
-		JComboBox tipo = new JComboBox();
-		tipo.setModel(new DefaultComboBoxModel(new String[] {"Seleccione Tipo", "Suelo calificado como industrial", "Suelo urbano", "Casa de ahorro, bancos", "Compañias de seguros", "Bares, Cafetrias, Restaurantes", "Salones recreativos", "Establecimientos Alimentarios", "Hoteles, Hostales, Pensiones", "Terrazas de verano", "Gasolineras, Depositos combustible"}));
+						filtroRegistro();
+
+					}
+				});
+				trOrden = new TableRowSorter(TablaInfo.getModel());
+				TablaInfo.setRowSorter(trOrden);
+			}
+		});
+		txtnRegistro.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		txtnRegistro.setColumns(10);
+
+		tipo = new JComboBox();
+		tipo.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				tipo.addKeyListener(new KeyAdapter() {
+					public void keyReleased(final KeyEvent arg0) {
+
+						filtroTipo();
+
+					}
+				});
+				trOrden = new TableRowSorter(TablaInfo.getModel());
+				TablaInfo.setRowSorter(trOrden);
+			}
+		});
+		
+		tipo.setModel(new DefaultComboBoxModel(new String[] { "Seleccione Tipo", "Suelo calificado como industrial",
+				"Suelo urbano", "Casa de ahorro, bancos", "Compañias de seguros", "Bares, Cafetrias, Restaurantes",
+				"Salones recreativos", "Establecimientos Alimentarios", "Hoteles, Hostales, Pensiones",
+				"Terrazas de verano", "Gasolineras, Depositos combustible" }));
 		tipo.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
-		JComboBox comboBox = new JComboBox();
-		comboBox.setModel(
-				new DefaultComboBoxModel(new String[] {"Seleccione estado", "En proceso", "Archivada", "Rechazada", "Aceptada"}));
+		comboBox = new JComboBox();
+		comboBox.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				comboBox.addKeyListener(new KeyAdapter() {
+					public void keyReleased(final KeyEvent arg0) {
+
+						filtroEstado();
+
+					}
+				});
+				trOrden = new TableRowSorter(TablaInfo.getModel());
+				TablaInfo.setRowSorter(trOrden);
+			}
+		});
+		comboBox.setModel(new DefaultComboBoxModel(
+				new String[] { "Seleccione estado", "En proceso", "Archivada", "Rechazada", "Aceptada" }));
 		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
 		JLabel lblEstado = new JLabel("Estado");
@@ -387,57 +445,93 @@ public class VistaPrincipal extends JFrame {
 		JLabel lblDnicifAsociado = new JLabel("DNI/CIF Asociado");
 		lblDnicifAsociado.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
-		textField_3 = new JTextField();
-		textField_3.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		textField_3.setColumns(10);
+		txtDNI = new JTextField();
+		txtDNI.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				txtDNI.addKeyListener(new KeyAdapter() {
+					public void keyReleased(final KeyEvent arg0) {
+
+						filtroDNI();
+
+					}
+				});
+				trOrden = new TableRowSorter(TablaInfo.getModel());
+				TablaInfo.setRowSorter(trOrden);
+			}
+		});
+		txtDNI.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		txtDNI.setColumns(10);
 		GroupLayout gl_panelLicencia = new GroupLayout(panelLicencia);
-		gl_panelLicencia.setHorizontalGroup(
-			gl_panelLicencia.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panelLicencia.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_panelLicencia.createParallelGroup(Alignment.LEADING)
-						.addComponent(registroLabel, GroupLayout.PREFERRED_SIZE, 229, GroupLayout.PREFERRED_SIZE)
-						.addGroup(gl_panelLicencia.createSequentialGroup()
-							.addComponent(textField_3, GroupLayout.DEFAULT_SIZE, 339, Short.MAX_VALUE)
-							.addPreferredGap(ComponentPlacement.RELATED))
-						.addGroup(Alignment.TRAILING, gl_panelLicencia.createSequentialGroup()
-							.addGroup(gl_panelLicencia.createParallelGroup(Alignment.TRAILING)
-								.addComponent(nRegistro, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 339, Short.MAX_VALUE)
-								.addComponent(lblDnicifAsociado, GroupLayout.DEFAULT_SIZE, 339, Short.MAX_VALUE))
-							.addPreferredGap(ComponentPlacement.RELATED)))
-					.addGroup(gl_panelLicencia.createParallelGroup(Alignment.LEADING)
-						.addComponent(comboBox, 0, 367, Short.MAX_VALUE)
-						.addComponent(lblEstado, GroupLayout.DEFAULT_SIZE, 367, Short.MAX_VALUE)
-						.addGroup(gl_panelLicencia.createSequentialGroup()
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(tipoLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-						.addComponent(tipo, 0, 367, Short.MAX_VALUE))
-					.addContainerGap())
-		);
-		gl_panelLicencia.setVerticalGroup(
-			gl_panelLicencia.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_panelLicencia.createSequentialGroup()
-					.addGap(21)
-					.addGroup(gl_panelLicencia.createParallelGroup(Alignment.BASELINE)
-						.addComponent(registroLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(tipoLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-					.addGap(12)
-					.addGroup(gl_panelLicencia.createParallelGroup(Alignment.BASELINE)
-						.addComponent(tipo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(nRegistro, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(18)
-					.addGroup(gl_panelLicencia.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblEstado, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblDnicifAsociado, GroupLayout.DEFAULT_SIZE, 17, Short.MAX_VALUE))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_panelLicencia.createParallelGroup(Alignment.BASELINE)
-						.addComponent(comboBox, GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
-						.addComponent(textField_3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(25))
-		);
+		gl_panelLicencia
+				.setHorizontalGroup(gl_panelLicencia.createParallelGroup(Alignment.LEADING).addGroup(gl_panelLicencia
+						.createSequentialGroup().addContainerGap().addGroup(gl_panelLicencia
+								.createParallelGroup(Alignment.LEADING).addComponent(registroLabel,
+										GroupLayout.PREFERRED_SIZE, 229, GroupLayout.PREFERRED_SIZE)
+								.addGroup(gl_panelLicencia.createSequentialGroup()
+										.addComponent(txtDNI, GroupLayout.DEFAULT_SIZE, 339, Short.MAX_VALUE)
+										.addPreferredGap(ComponentPlacement.RELATED))
+								.addGroup(Alignment.TRAILING, gl_panelLicencia.createSequentialGroup()
+										.addGroup(gl_panelLicencia.createParallelGroup(Alignment.TRAILING)
+												.addComponent(txtnRegistro, Alignment.LEADING, GroupLayout.DEFAULT_SIZE,
+														339, Short.MAX_VALUE)
+												.addComponent(lblDnicifAsociado, GroupLayout.DEFAULT_SIZE, 339,
+														Short.MAX_VALUE))
+										.addPreferredGap(ComponentPlacement.RELATED)))
+						.addGroup(gl_panelLicencia.createParallelGroup(Alignment.LEADING)
+								.addComponent(comboBox, 0, 367, Short.MAX_VALUE)
+								.addComponent(lblEstado, GroupLayout.DEFAULT_SIZE, 367, Short.MAX_VALUE)
+								.addGroup(gl_panelLicencia.createSequentialGroup()
+										.addPreferredGap(ComponentPlacement.RELATED).addComponent(tipoLabel,
+												GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+								.addComponent(tipo, 0, 367, Short.MAX_VALUE))
+						.addContainerGap()));
+		gl_panelLicencia.setVerticalGroup(gl_panelLicencia.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_panelLicencia.createSequentialGroup().addGap(21)
+						.addGroup(gl_panelLicencia.createParallelGroup(Alignment.BASELINE)
+								.addComponent(registroLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,
+										Short.MAX_VALUE)
+								.addComponent(tipoLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,
+										Short.MAX_VALUE))
+						.addGap(12)
+						.addGroup(gl_panelLicencia.createParallelGroup(Alignment.BASELINE)
+								.addComponent(tipo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+										GroupLayout.PREFERRED_SIZE)
+								.addComponent(txtnRegistro, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+										GroupLayout.PREFERRED_SIZE))
+						.addGap(18)
+						.addGroup(gl_panelLicencia.createParallelGroup(Alignment.BASELINE)
+								.addComponent(lblEstado, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblDnicifAsociado, GroupLayout.DEFAULT_SIZE, 17, Short.MAX_VALUE))
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addGroup(gl_panelLicencia.createParallelGroup(Alignment.BASELINE)
+								.addComponent(comboBox, GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
+								.addComponent(txtDNI, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+										GroupLayout.PREFERRED_SIZE))
+						.addGap(25)));
 		panelLicencia.setLayout(gl_panelLicencia);
 		Main.setLayout(gl_Main);
 		contentPane.setLayout(gl_contentPane);
+	}
+
+	public void filtroRegistro() {
+		trOrden.setRowFilter(RowFilter.regexFilter(txtnRegistro.getText(), 0));
+
+	}
+	
+	public void filtroDNI() {
+		trOrden.setRowFilter(RowFilter.regexFilter(txtDNI.getText(), 1));
+
+	}
+	
+	public void filtroTipo() {
+		trOrden.setRowFilter(RowFilter.regexFilter(tipo.getSelectedItem().toString(), 3));
+
+	}
+	
+	public void filtroEstado() {
+		trOrden.setRowFilter(RowFilter.regexFilter(comboBox.getSelectedItem().toString(), 5));
+		
 	}
 
 	public void onLoadTable() {

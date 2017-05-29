@@ -88,18 +88,28 @@ public class Controlador {
 		modelo.insertSolicitud(vistaInscripcion.getFechaSolicitud(), vistaInscripcion.getComboTipo(),
 				vistaInscripcion.getTxtDescrAct(), vistaInscripcion.getTxtReferencia(),
 				vistaInscripcion.getComboSuelo(), vistaInscripcion.getFechaActividad(), "En proceso",
-				vistaInscripcion.getChckbxDNI(),vistaInscripcion.getChckbxFotocopiaImpuestoActividades(), vistaInscripcion.getChckbxEscritura(),
-				vistaInscripcion.getChckbxJustificantePago(), vistaInscripcion.getChckbxChckbxMemoria(),
-				vistaInscripcion.getChckbxPlanoAcotadoDel(), vistaInscripcion.getChckbxLicenciaObra(),
-				vistaInscripcion.getChckbxCertificadoColegio(), vistaInscripcion.getChckbxOtrasAutorizaciones());
+				vistaInscripcion.getChckbxDNI(), vistaInscripcion.getChckbxFotocopiaImpuestoActividades(),
+				vistaInscripcion.getChckbxEscritura(), vistaInscripcion.getChckbxJustificantePago(),
+				vistaInscripcion.getChckbxChckbxMemoria(), vistaInscripcion.getChckbxPlanoAcotadoDel(),
+				vistaInscripcion.getChckbxLicenciaObra(), vistaInscripcion.getChckbxCertificadoColegio(),
+				vistaInscripcion.getChckbxOtrasAutorizaciones());
 
 		// return solicitud;
 	}
 
 	public void InsertPersona() {
-		modelo.inertPersona(vistaInscripcion.getTxtNombre(), Integer.parseInt(vistaInscripcion.getTxtDNI()),
-				vistaInscripcion.getTxtDireccion(), vistaInscripcion.getTxtMunicipio(), vistaInscripcion.getTxtCp(),
-				vistaInscripcion.getTxtFax(), vistaInscripcion.getTxtMovil(), vistaInscripcion.getTxtMail(), "Física");
+		if (!vistaInscripcion.getChckbxRequired().isSelected()) {
+			modelo.inertPersona(vistaInscripcion.getTxtNombre(), Integer.parseInt(vistaInscripcion.getTxtDNI()),
+					vistaInscripcion.getTxtDireccion(), vistaInscripcion.getTxtMunicipio(), vistaInscripcion.getTxtCp(),
+					vistaInscripcion.getTxtFax(), vistaInscripcion.getTxtMovil(), vistaInscripcion.getTxtMail(),
+					"Física");
+		} else {
+			modelo.inertPersona(vistaInscripcion.getTxtNombre(), Integer.parseInt(vistaInscripcion.getTxtDNI()),
+					vistaInscripcion.getTxtDireccion(), vistaInscripcion.getTxtMunicipio(), vistaInscripcion.getTxtCp(),
+					vistaInscripcion.getTxtFax(), vistaInscripcion.getTxtMovil(), vistaInscripcion.getTxtMail(),
+					"Jurídica");
+
+		}
 	}
 
 	public void InsertRepresentante() {
@@ -122,6 +132,8 @@ public class Controlador {
 	public void mostrarDatos() {
 		modeloIni.mostrar();
 	}
+	
+	
 
 	public void enableComponents(Container container, boolean enable) {
 		Component[] components = container.getComponents();
