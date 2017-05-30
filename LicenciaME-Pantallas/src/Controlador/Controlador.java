@@ -2,6 +2,7 @@ package Controlador;
 
 import java.awt.Component;
 import java.awt.Container;
+import java.sql.Date;
 
 import Modelo.Modelo;
 import Modelo.ModeloIni;
@@ -77,7 +78,7 @@ public class Controlador {
 		vistaConfiguracion.setVisible(true);
 	}
 
-	public void InsertSolicitud() {
+	public int InsertSolicitud() {
 
 		// modelo.insertSolicitud(Integer.parseInt(vistaInscripcion.getTxtDNI()),
 		// vistaInscripcion.getTxtDescrAct().getText(),
@@ -85,7 +86,7 @@ public class Controlador {
 		// vistaInscripcion.getLocalDate());
 
 		// ultimaSolicitud =
-		modelo.insertSolicitud(vistaInscripcion.getFechaSolicitud(), vistaInscripcion.getComboTipo(),
+		return modelo.insertSolicitud(vistaInscripcion.getFechaSolicitud(), vistaInscripcion.getComboTipo(),
 				vistaInscripcion.getTxtDescrAct(), vistaInscripcion.getTxtReferencia(),
 				vistaInscripcion.getComboSuelo(), vistaInscripcion.getFechaActividad(), "En proceso",
 				vistaInscripcion.getChckbxDNI(), vistaInscripcion.getChckbxFotocopiaImpuestoActividades(),
@@ -97,27 +98,41 @@ public class Controlador {
 		// return solicitud;
 	}
 
-	public void InsertPersona() {
+	public int InsertPersona() {
 		if (!vistaInscripcion.getChckbxRequired().isSelected()) {
-			modelo.inertPersona(vistaInscripcion.getTxtNombre(), Integer.parseInt(vistaInscripcion.getTxtDNI()),
+			return modelo.inertPersona(vistaInscripcion.getTxtNombre(), Integer.parseInt(vistaInscripcion.getTxtDNI()),
 					vistaInscripcion.getTxtDireccion(), vistaInscripcion.getTxtMunicipio(), vistaInscripcion.getTxtCp(),
 					vistaInscripcion.getTxtFax(), vistaInscripcion.getTxtMovil(), vistaInscripcion.getTxtMail(),
 					"Física");
 		} else {
-			modelo.inertPersona(vistaInscripcion.getTxtNombre(), Integer.parseInt(vistaInscripcion.getTxtDNI()),
+			return modelo.inertPersona(vistaInscripcion.getTxtNombre(), Integer.parseInt(vistaInscripcion.getTxtDNI()),
 					vistaInscripcion.getTxtDireccion(), vistaInscripcion.getTxtMunicipio(), vistaInscripcion.getTxtCp(),
 					vistaInscripcion.getTxtFax(), vistaInscripcion.getTxtMovil(), vistaInscripcion.getTxtMail(),
 					"Jurídica");
 
 		}
+		
 	}
 
-	public void InsertRepresentante() {
-		modelo.inertRepresentante(vistaInscripcion.gettxtNombreApellidosRepre(),
+	public int InsertRepresentante() {
+		return modelo.inertRepresentante(vistaInscripcion.gettxtNombreApellidosRepre(),
 				Integer.parseInt(vistaInscripcion.gettxtDniRepre()), vistaInscripcion.gettxtDireccionRepre(),
 				vistaInscripcion.gettxtMunicipioRepre(), vistaInscripcion.gettxtCpRepre(),
 				vistaInscripcion.gettxtFaxRepre(), vistaInscripcion.gettxtMovilRepre());
 	}
+
+	  public void insertarTablaPersonaRepre(int idPersona, int idRepre){
+		  modelo.insertarTablaPersonaRepre(idPersona,idRepre);
+		  
+		  
+	  }
+	  
+	  public void insertarTablaPersonaSolicitud(int idPersona, int idAct){
+		  modelo.insertarTablaPersonaSolicitud(idPersona,idAct,vistaInscripcion.getFechaSolicitud());
+		  
+		  
+		 }
+	  
 
 	public void MostrarTabla() {
 		modelo.ShowJTable();

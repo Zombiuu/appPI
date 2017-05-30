@@ -301,16 +301,25 @@ public class VistaInscripcion extends JFrame {
 				JButton btnEnviar = new JButton("Enviar");
 				btnEnviar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						controlador.InsertSolicitud();
-						controlador.InsertPersona();
-						if(getChckbxRequired().isSelected()){
 							
-							controlador.InsertRepresentante();
+						if(getChckbxRequired().isSelected()){
+							int idAct=controlador.InsertSolicitud();
+							int idPer=controlador.InsertPersona();
+							int idRep=controlador.InsertRepresentante();
+							controlador.insertarTablaPersonaRepre(idPer, idRep);
+							controlador.insertarTablaPersonaSolicitud(idPer, idAct);
+						}else{
+							int idAct=controlador.InsertSolicitud();
+							int idPer=controlador.InsertPersona();
+							controlador.insertarTablaPersonaSolicitud(idPer, idAct);
 						}
 						//controlador.insertTI();
 						
 					}
 				});
+				
+				
+			
 				btnEnviar.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		
 				JButton btnCancelar = new JButton("Cancelar");

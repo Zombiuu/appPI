@@ -9,6 +9,7 @@ import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
@@ -93,13 +94,14 @@ public class Modelo {
 	 * Execute SQL Query
 	 */
 
-	public void insertSolicitud(String fechaSolicitud, String tipo, String descripcionActividad,
+	public int insertSolicitud(String fechaSolicitud, String tipo, String descripcionActividad,
 			String referenciaCatastral, String tipoSuelo, String fechaInicio, String estado, int fotocopiaDNI,
 			int fotocopiaImpuesto, int fotocopiaEscritura, int justificantePago, int memoriaActividad, int planos,
 			int licenciaObra, int certificadoColegioOficial, int otrasAutorizaciones) {
 		Connection con = getConnection();
 		PreparedStatement ps;
-		
+		int r = 0;
+		int last_inserted_id=-1;
 		String query = "INSERT INTO `solicitud` (`fecha`, `tipo`, `desc_actividad`, `ref_catastral`, `tipo_suelo`, `fecha_inicio`, `estado`, `fotocopia_dni`, `fotocopia_imp_actividades`, `fotocopia_escritura`, `justificante_pago`, `memoria_actividad`, `planos`, `licencia_obra`, `otras_autorizaciones`, `certificado_colegio_oficial`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		try {
 			ps = con.prepareStatement(query);
@@ -120,41 +122,18 @@ public class Modelo {
 			ps.setInt(15, certificadoColegioOficial);
 			ps.setInt(16, otrasAutorizaciones);
 
+			
 			if (ps.executeUpdate() == 1) {
-
-				DefaultTableModel model = (DefaultTableModel) vistaPrincipal.getTablaInfo();
-				model.setRowCount(0);
-				ShowJTable();
-				JOptionPane.showMessageDialog(null, "Información almacenada satisfactoriamente");
-				vistaInscripcion.dispose();
-			} else {
-				JOptionPane.showMessageDialog(null, "La informaciï¿½n no pudo ser almacenada");
-			}
-		} catch (Exception ex) {
-			// TODO: handle exception
-			ex.printStackTrace();
-		}
-	}
-
-	public void inertPersona(String nombre, int DNI, String direccion, String municipio, String cp,String fijo,
-			String movil, String mail, String tipo) {
-		Connection con = getConnection();
-		PreparedStatement ps;
-		
-		String query = "INSERT INTO `persona`(`cif`, `nombre`, `direccion`, `municipio`, `cp`, `tlf_fijo`, `tlf_movil`, `email`, `tipo`) VALUES (?,?,?,?,?,?,?,?,?)";
-		try {
-			ps = con.prepareStatement(query);
-			ps.setInt(1, DNI);
-			ps.setString(2, nombre);
-			ps.setString(3, direccion);
-			ps.setString(4, municipio);
-			ps.setString(5, cp);
-			ps.setString(6, fijo);
-			ps.setString(7, movil);
-			ps.setString(8, mail);
-			ps.setString(9, tipo);
-
-			if (ps.executeUpdate() == 1) {
+				 ResultSet rs = ps.getGeneratedKeys();
+	             if(rs.next()){
+	            	 
+	            	 
+	            	 
+	              last_inserted_id = rs.getInt(1);
+	                 
+	              System.out.println(last_inserted_id);
+	              
+	            }
 
 				DefaultTableModel model = (DefaultTableModel) vistaPrincipal.getTablaInfo();
 				model.setRowCount(0);
@@ -168,6 +147,55 @@ public class Modelo {
 			// TODO: handle exception
 			ex.printStackTrace();
 		}
+		 return last_inserted_id;
+	}
+	
+	
+
+	public int inertPersona(String nombre, int DNI, String direccion, String municipio, String cp,String fijo,
+			String movil, String mail, String tipo) {
+		Connection con = getConnection();
+		PreparedStatement ps;
+		int r = 0;
+		int last_inserted_id=-1;
+		String query = "INSERT INTO `persona`(`cif`, `nombre`, `direccion`, `municipio`, `cp`, `tlf_fijo`, `tlf_movil`, `email`, `tipo`) VALUES (?,?,?,?,?,?,?,?,?)";
+		try {
+			ps = con.prepareStatement(query);
+			ps.setInt(1, DNI);
+			ps.setString(2, nombre);
+			ps.setString(3, direccion);
+			ps.setString(4, municipio);
+			ps.setString(5, cp);
+			ps.setString(6, fijo);
+			ps.setString(7, movil);
+			ps.setString(8, mail);
+			ps.setString(9, tipo);
+		
+			if (ps.executeUpdate() == 1) {
+				 ResultSet rs = ps.getGeneratedKeys();
+	             if(rs.next()){
+	            	 
+	            	 
+	            	 
+	              last_inserted_id = rs.getInt(1);
+	                 
+	              System.out.println(last_inserted_id);
+	              
+	            }
+
+				DefaultTableModel model = (DefaultTableModel) vistaPrincipal.getTablaInfo();
+				model.setRowCount(0);
+				ShowJTable();
+				vistaInscripcion.dispose();
+				JOptionPane.showMessageDialog(null, "Información almacenada satisfactoriamente");
+			} else {
+				JOptionPane.showMessageDialog(null, "La información no pudo ser almacenada");
+			}
+		} catch (Exception ex) {
+			// TODO: handle exception
+			ex.printStackTrace();
+		}
+		 return last_inserted_id;
 	}
 
 	public ArrayList<Modelo> getInscripcionesList() {
@@ -195,10 +223,12 @@ public class Modelo {
 	}
 	
 	
-	public void inertRepresentante(String nombre, int DNI, String direccion, String municipio,
+	public int inertRepresentante(String nombre, int DNI, String direccion, String municipio,
 			String cp, String fax, String movil) {
 		Connection con = getConnection();
 		PreparedStatement ps;
+		int r = 0;
+		int last_inserted_id=-1;
 
 		String query="INSERT INTO `representante`(`nif_nie`, `nombre`, `direccion`, `municipio`, `cp`, `tlf_fijo`, `tlf_movil`) VALUES (?,?,?,?,?,?,?)";
 		try {
@@ -214,8 +244,16 @@ public class Modelo {
 			
 			
 			
+		
 			if (ps.executeUpdate() == 1) {
-
+				 ResultSet rs = ps.getGeneratedKeys();
+	             if(rs.next()){
+	            	 
+	              last_inserted_id = rs.getInt(1);
+	                 
+	                 System.out.println(last_inserted_id);
+	              
+	            }
 				DefaultTableModel model = (DefaultTableModel) vistaPrincipal.getTablaInfo();
 				model.setRowCount(0);
 				ShowJTable();
@@ -228,8 +266,68 @@ public class Modelo {
 			// TODO: handle exception
 			ex.printStackTrace();
 		}
+		 return last_inserted_id;
 		
 	}
+	
+	public void insertarTablaPersonaRepre(int idPersona, int idRepre) {
+		  Connection con = getConnection();
+		  String query = "INSERT INTO `representa` ( `persona`, `representante`) VALUES ( ?,? );";
+		  PreparedStatement ps;
+		  
+		  try {
+		  ps = con.prepareStatement(query,Statement.RETURN_GENERATED_KEYS);
+		  ps.setInt(1, idPersona);
+		  ps.setInt(2, idRepre);
+		  
+		
+		 
+			if (ps.executeUpdate() == 1) {
+				DefaultTableModel model = (DefaultTableModel) vistaPrincipal.getTablaInfo();
+				model.setRowCount(0);
+				ShowJTable();
+				vistaInscripcion.dispose();
+				JOptionPane.showMessageDialog(null, "Información almacenada satisfactoriamente");
+			} else {
+				JOptionPane.showMessageDialog(null, "La información no pudo ser almacenada");
+			}
+		} catch (Exception ex) {
+			// TODO: handle exception
+			ex.printStackTrace();
+		}
+		
+	}
+	
+	public void insertarTablaPersonaSolicitud(int idPersona, int idAct,String fechaSolicitud) {
+		  Connection con = getConnection();
+		  String query = "INSERT INTO `titularidad` (`persona`, `solicitud`, `fecha_inicio`, `fecha_fin`) VALUES ( ?,?,?,? );";
+		  PreparedStatement ps;
+		  
+		  try {
+		  ps = con.prepareStatement(query,Statement.RETURN_GENERATED_KEYS);
+		  ps.setInt(1, idPersona);
+		  ps.setInt(2, idAct);
+		  ps.setString(3, fechaSolicitud);
+		  ps.setString(4, null);
+		  
+		
+		 
+			if (ps.executeUpdate() == 1) {
+				DefaultTableModel model = (DefaultTableModel) vistaPrincipal.getTablaInfo();
+				model.setRowCount(0);
+				ShowJTable();
+				vistaInscripcion.dispose();
+				JOptionPane.showMessageDialog(null, "Información almacenada satisfactoriamente");
+			} else {
+				JOptionPane.showMessageDialog(null, "La información no pudo ser almacenada");
+			}
+		} catch (Exception ex) {
+			// TODO: handle exception
+			ex.printStackTrace();
+		}
+		
+	}
+
 
 	/*
 	 * Mostrar Tabla
