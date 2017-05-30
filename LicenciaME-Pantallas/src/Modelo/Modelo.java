@@ -40,11 +40,26 @@ public class Modelo {
 	private VistaModificacion vistaModificacion;
 	private ModeloIni modeloIni;
 
-	// variables
-
+	// variables persona vistaModificacion
 	private int txtDni;
+	private int txtCp;
+	private int txtMovil;
+	private int txtFax;
 	private String txtNombre;
 	private int txtReferencia;
+	private String txtDireccion;
+	private String txtMunicipio;
+	private String txtMail;
+	// variables representante vistaModificacion
+	private int txtDniRepre;
+	private String txtNombreApellidosRepre;
+	private int txtMovilRepre;
+	private int txtCpRepre;
+	private int txtFaxRepre;
+	private String txtDireccionRepre;
+	private String txtMunicipioRepre;
+	private String txtMailRepre;
+	
 
 	public Modelo() {
 		super();
@@ -325,32 +340,42 @@ public class Modelo {
 
 				System.exit(-1);
 			}
+			//PreparedStatement ps = con.prepareStatement(
+			//		"SELECT persona.cif as cif,persona.nombre as nombre, solicitud.ref_catastral as ref FROM persona JOIN titularidad ON persona.id_persona = titularidad.persona JOIN solicitud ON titularidad.solicitud = solicitud.id_solicitud WHERE solicitud.id_solicitud = ?");
 			PreparedStatement ps = con.prepareStatement(
-					"SELECT persona.cif as cif,persona.nombre as nombre, solicitud.ref_catastral as ref FROM persona JOIN titularidad ON persona.id_persona = titularidad.persona JOIN solicitud ON titularidad.solicitud = solicitud.id_solicitud WHERE solicitud.id_solicitud = ?");
+			"SELECT persona.cif as cifPersona, persona.direccion as direccionPersona, persona.municipio as municipioPersona, persona.cp as cpPersona, persona.tlf_fijo as fijoPersona, persona.tlf_movil as movilPersona, persona.nombre as nombrePersona, persona.email as emailPersona, representante.nif_nie as nifRepre, representante.direccion as direccionRepre, representante.municipio as municipioRepre, representante.cp as cpRepre, representante.tlf_fijo as fijoRepre, representante.tlf_movil as movilRepre, representante.nombre as nombreRepre, solicitud.ref_catastral as refSolicitud FROM persona JOIN titularidad ON persona.id_persona = titularidad.persona JOIN solicitud ON titularidad.solicitud = solicitud.id_solicitud JOIN representa ON persona.id_persona = representa.persona JOIN representante ON representante.id_representante = representa.representante WHERE persona.id_persona = ?");
 			ps.setInt(1, nRegistro);
 			ResultSet rset = ps.executeQuery();
 
 			int z = 0;
 			while (rset.next()) {
-
+				// persona
 				txtDni = rset.getInt("cif");
 				txtNombre = rset.getString("nombre");
+				txtCp = rset.getInt("cp");
+				txtMunicipio = rset.getString("municipio");
+				txtDireccion = rset.getString("direccion");
+				txtFax = rset.getInt("tlf_fijo");
+				txtMail = rset.getString("email");
+				txtMovil = rset.getInt("tlf_movil");
+				//representante
+				
+				txtDniRepre = rset.getInt("cif");
+				txtNombreApellidosRepre = rset.getString("nombre");
+				txtCpRepre = rset.getInt("cp");
+				txtMunicipioRepre = rset.getString("municipio");
+				txtDireccionRepre = rset.getString("direccion");
+				txtFaxRepre = rset.getInt("tlf_fijo");
+				txtMailRepre = rset.getString("email");
+				txtMovilRepre = rset.getInt("tlf_movil");
+				
+				
+				//solicitud
+				
+				
+				
 				txtReferencia = rset.getInt("ref");
-				// intnombre = rset.getString("NOMBRE");
-				// intapellidos = rset.getString("APELLIDOS");
-				// tipoPersona = rset.getString("TIPO_SOLICITANTE");
-				// direccion = rset.getString("DIRECCION");
-				// municipio = rset.getString("MUNICIPIO");
-				// cp = rset.getString("COD_POSTAL");
-				// razonSocial = rset.getString("RAZON_SOCIAL");
-				// cif = rset.getString("CIF_NIF_NIE");
-				// antiguoTitular = rset.getString("CIF_NIF_NIE");
-				// tlfFijo = rset.getString("TELEFONO_FIJO");
-				// tlfMovil = rset.getString("TELEFONO_MOVIL");
-				// email = rset.getString("EMAIL");
-				// fax = rset.getString("FAX");
-				// fechaActividadAntiguoTitular =
-				// rset.getString("FechaInicioActividad");
+				
 
 				z += 1;
 			}
@@ -424,6 +449,62 @@ public class Modelo {
 
 	public String getEstado() {
 		return estado;
+	}
+
+	public int getTxtCp() {
+		return txtCp;
+	}
+
+	public int getTxtMovil() {
+		return txtMovil;
+	}
+
+	public int getTxtFax() {
+		return txtFax;
+	}
+
+	public String getTxtDireccion() {
+		return txtDireccion;
+	}
+
+	public String getTxtMunicipio() {
+		return txtMunicipio;
+	}
+
+	public String getTxtMail() {
+		return txtMail;
+	}
+
+	public int getTxtDniRepre() {
+		return txtDniRepre;
+	}
+
+	public String getTxtNombreApellidosRepre() {
+		return txtNombreApellidosRepre;
+	}
+
+	public int getTxtMovilRepre() {
+		return txtMovilRepre;
+	}
+
+	public int getTxtCpRepre() {
+		return txtCpRepre;
+	}
+
+	public int getTxtFaxRepre() {
+		return txtFaxRepre;
+	}
+
+	public String getTxtDireccionRepre() {
+		return txtDireccionRepre;
+	}
+
+	public String getTxtMunicipioRepre() {
+		return txtMunicipioRepre;
+	}
+
+	public String getTxtMailRepre() {
+		return txtMailRepre;
 	}
 
 	public int getTxtDni() {

@@ -935,6 +935,12 @@ public class VistaModificacion extends JFrame {
 		txtDNI.setText(Integer.toString(modelo.getTxtDni()));
 		txtNombre.setText(modelo.getTxtNombre());
 		txtReferencia.setText(Integer.toString(modelo.getTxtReferencia()));
+		txtCp.setText(Integer.toString(modelo.getTxtCp()));
+		txtDireccion.setText(modelo.getTxtDireccion());
+		txtFax.setText(Integer.toString(modelo.getTxtFax()));
+		txtMail.setText(modelo.getTxtMail());
+		txtMovil.setText(Integer.toString(modelo.getTxtMovil()));
+		txtMunicipio.setText(modelo.getTxtMunicipio());
 	}
 	
 	public void setControlador(Controlador controlador) {
