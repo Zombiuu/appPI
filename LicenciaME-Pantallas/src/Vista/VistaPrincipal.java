@@ -311,7 +311,12 @@ public class VistaPrincipal extends JFrame {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				if (e.getClickCount() == 2) {
-					controlador.abrirVentanaInscripcion();
+					controlador.abrirVentanaModificacion();
+					DefaultTableModel model = (DefaultTableModel) TablaInfo.getModel();
+					int selectedRowIndex = TablaInfo.getSelectedRow();
+					
+					controlador.recogerRegistroCambio();
+
 					btnArchivar.setEnabled(true);
 				}
 			}
@@ -540,6 +545,9 @@ public class VistaPrincipal extends JFrame {
 
 	public TableModel getTablaInfo() {
 		return TablaInfo.getModel();
+	}
+	public JTable getTablaInfo2() {
+		return TablaInfo;
 	}
 
 	public void setControlador(Controlador controlador) {

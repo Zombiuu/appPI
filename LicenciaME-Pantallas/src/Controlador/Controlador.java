@@ -8,6 +8,7 @@ import Modelo.Modelo;
 import Modelo.ModeloIni;
 import Vista.VistaConfiguracion;
 import Vista.VistaInscripcion;
+import Vista.VistaModificacion;
 import Vista.VistaPrincipal;
 
 public class Controlador {
@@ -16,6 +17,8 @@ public class Controlador {
 	private VistaPrincipal vistaPrincipal;
 	private VistaInscripcion vistaInscripcion;
 	private VistaConfiguracion vistaConfiguracion;
+	private VistaModificacion vistaModificacion;
+	private int nRegistro;
 
 	private int ultimaSolicitud;
 	private int ultimaPersona;
@@ -30,6 +33,10 @@ public class Controlador {
 
 	public void setVistaInscripcion(VistaInscripcion vistaInscripcion) {
 		this.vistaInscripcion = vistaInscripcion;
+	}
+
+	public void setVistaModificacion(VistaModificacion vistaModificacion) {
+		this.vistaModificacion = vistaModificacion;
 	}
 
 	public void setVistaConfiguracion(VistaConfiguracion vistaConfiguracion) {
@@ -52,7 +59,15 @@ public class Controlador {
 		modelo.setVistaInscripcion(vistaInscripcion);
 		vistaInscripcion.setVisible(true);
 	}
-
+	public void abrirVentanaModificacion() {
+		
+			vistaModificacion = new VistaModificacion();
+			vistaModificacion.setModelo(modelo);
+			vistaModificacion.setControlador(this);
+			modelo.setVistaModificacion(vistaModificacion);
+			vistaModificacion.setVisible(true);
+		
+	}
 	public void cerrarVentanaInscripcion() {
 		vistaInscripcion.dispose();
 		vistaInscripcion = new VistaInscripcion();
@@ -148,6 +163,11 @@ public class Controlador {
 		modeloIni.mostrar();
 	}
 	
+	public void recogerRegistroCambio(){
+		nRegistro=Integer.parseInt(String.valueOf(vistaPrincipal.getTablaInfo2().getValueAt(vistaPrincipal.getTablaInfo2().getSelectedRow(),0)));
+		modelo.datosModificacion(nRegistro);
+		}
+
 	
 
 	public void enableComponents(Container container, boolean enable) {
