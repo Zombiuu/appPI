@@ -52,7 +52,6 @@ public class VistaInscripcion extends JFrame {
 	private JTextField txtCpRepre;
 	private JTextField txtMovilRepre;
 	private JTextField txtFaxRepre;
-	private JTextField txtMailRepre;
 	private JTextField txtNombreApellidosRepre;
 	private JTextField txtDireccionRepre;
 	private JTextField txtMunicipioRepre;
@@ -70,7 +69,6 @@ public class VistaInscripcion extends JFrame {
 	private JCheckBox chckbxEscritura;
 	private JCheckBox chckbxJustificantePago;
 	private JCheckBox chckbxFotocopiaImpuestoActividades;
-	private JCheckBox chckbxPropiedad;
 	private JCheckBox chckbxMemoria;
 	private JCheckBox chckbxCertificadoColegio;
 	private JCheckBox chckbxPlanoAcotadoDel;
@@ -82,9 +80,9 @@ public class VistaInscripcion extends JFrame {
 	 * Create the frame.
 	 */
 	public VistaInscripcion() {
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setResizable(false);
 		setTitle("Formulario de inscripci\u00F3n");
-		setDefaultCloseOperation(this.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 1153, 532);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -118,9 +116,9 @@ public class VistaInscripcion extends JFrame {
 								gl_panelDoc.setVerticalGroup(
 									gl_panelDoc.createParallelGroup(Alignment.LEADING)
 										.addGroup(gl_panelDoc.createSequentialGroup()
-											.addComponent(panelDocGen, GroupLayout.PREFERRED_SIZE, 113, GroupLayout.PREFERRED_SIZE)
-											.addPreferredGap(ComponentPlacement.RELATED)
-											.addComponent(panelDocTec, GroupLayout.PREFERRED_SIZE, 88, GroupLayout.PREFERRED_SIZE)
+											.addComponent(panelDocGen, GroupLayout.PREFERRED_SIZE, 72, GroupLayout.PREFERRED_SIZE)
+											.addGap(18)
+											.addComponent(panelDocTec, GroupLayout.PREFERRED_SIZE, 117, GroupLayout.PREFERRED_SIZE)
 											.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 								);
 								
@@ -193,12 +191,6 @@ public class VistaInscripcion extends JFrame {
 																												
 																														JLabel lblDocGen = new JLabel("Documentaci\u00F3n general.");
 																														lblDocGen.setFont(new Font("Tahoma", Font.BOLD, 11));
-																														
-																																chckbxPropiedad = new JCheckBox(
-																																		"Escritura de propiedad, contrato de arrendamiento o documentaci\u00F3n justificativa.");
-																																chckbxPropiedad.setFont(new Font("Tahoma", Font.PLAIN, 11));
-																																
-																																		JLabel lblCambiosTitu = new JLabel("Solo cambios titularidad");
 																																		GroupLayout gl_panelDocGen = new GroupLayout(panelDocGen);
 																																		gl_panelDocGen.setHorizontalGroup(
 																																			gl_panelDocGen.createParallelGroup(Alignment.LEADING)
@@ -213,9 +205,7 @@ public class VistaInscripcion extends JFrame {
 																																							.addComponent(chckbxJustificantePago)
 																																							.addPreferredGap(ComponentPlacement.RELATED)
 																																							.addComponent(chckbxFotocopiaImpuestoActividades, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-																																						.addComponent(chckbxPropiedad, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 492, Short.MAX_VALUE)
-																																						.addComponent(lblDocGen, GroupLayout.PREFERRED_SIZE, 145, GroupLayout.PREFERRED_SIZE)
-																																						.addComponent(lblCambiosTitu, GroupLayout.DEFAULT_SIZE, 492, Short.MAX_VALUE))
+																																						.addComponent(lblDocGen, GroupLayout.PREFERRED_SIZE, 145, GroupLayout.PREFERRED_SIZE))
 																																					.addGap(328))
 																																		);
 																																		gl_panelDocGen.setVerticalGroup(
@@ -229,11 +219,7 @@ public class VistaInscripcion extends JFrame {
 																																						.addComponent(chckbxEscritura)
 																																						.addComponent(chckbxJustificantePago)
 																																						.addComponent(chckbxFotocopiaImpuestoActividades))
-																																					.addGap(3)
-																																					.addComponent(lblCambiosTitu)
-																																					.addPreferredGap(ComponentPlacement.RELATED)
-																																					.addComponent(chckbxPropiedad)
-																																					.addGap(17))
+																																					.addGap(59))
 																																		);
 																																		panelDocGen.setLayout(gl_panelDocGen);
 																																		panelDoc.setLayout(gl_panelDoc);
@@ -255,7 +241,7 @@ public class VistaInscripcion extends JFrame {
 												JLabel lblTipoSuelo = new JLabel("Tipo Suelo");
 												
 												comboSuelo = new JComboBox();
-												comboSuelo.setModel(new DefaultComboBoxModel(new String[] {"Seleccione Tipo", "Urbano", "Rustico"}));
+												comboSuelo.setModel(new DefaultComboBoxModel(new String[] {"Seleccione Tipo", "Urbano", "R\u00FAstico"}));
 												GroupLayout gl_panelLocal = new GroupLayout(panelLocal);
 												gl_panelLocal.setHorizontalGroup(
 													gl_panelLocal.createParallelGroup(Alignment.LEADING)
@@ -398,13 +384,6 @@ public class VistaInscripcion extends JFrame {
 		JLabel lblTelfonofax = new JLabel("Tel\u00E9fono/FAX");
 		lblTelfonofax.setEnabled(false);
 
-		txtMailRepre = new JTextField();
-		txtMailRepre.setEnabled(false);
-		txtMailRepre.setColumns(10);
-
-		JLabel label_4 = new JLabel("Direcci\u00F3n e-mail");
-		label_4.setEnabled(false);
-
 		txtNombreApellidosRepre = new JTextField();
 		txtNombreApellidosRepre.setEnabled(false);
 		txtNombreApellidosRepre.setColumns(10);
@@ -427,91 +406,75 @@ public class VistaInscripcion extends JFrame {
 		label_7.setEnabled(false);
 		GroupLayout gl_panelRepresentante = new GroupLayout(panelRepresentante);
 		gl_panelRepresentante.setHorizontalGroup(
-				gl_panelRepresentante.createParallelGroup(Alignment.LEADING).addGap(0, 532, Short.MAX_VALUE)
-						.addGroup(gl_panelRepresentante
-								.createSequentialGroup().addContainerGap().addGroup(gl_panelRepresentante
-										.createParallelGroup(Alignment.LEADING).addGroup(gl_panelRepresentante
-												.createSequentialGroup()
-												.addGroup(gl_panelRepresentante.createParallelGroup(Alignment.LEADING)
-														.addComponent(txtNombreApellidosRepre, GroupLayout.PREFERRED_SIZE, 377,
-																GroupLayout.PREFERRED_SIZE)
-														.addComponent(label_5))
-												.addPreferredGap(ComponentPlacement.RELATED)
-												.addGroup(gl_panelRepresentante.createParallelGroup(Alignment.LEADING)
-														.addComponent(label).addComponent(txtDniRepre,
-																GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)))
-										.addGroup(gl_panelRepresentante.createSequentialGroup()
-												.addGroup(gl_panelRepresentante
-														.createParallelGroup(Alignment.TRAILING, false)
-														.addGroup(Alignment.LEADING, gl_panelRepresentante
-																.createSequentialGroup()
-																.addGroup(gl_panelRepresentante
-																		.createParallelGroup(Alignment.LEADING)
-																		.addComponent(label_6).addComponent(txtDireccionRepre,
-																				GroupLayout.PREFERRED_SIZE, 207,
-																				GroupLayout.PREFERRED_SIZE))
-																.addPreferredGap(ComponentPlacement.RELATED)
-																.addGroup(gl_panelRepresentante
-																		.createParallelGroup(Alignment.LEADING, false)
-																		.addComponent(txtMunicipioRepre).addComponent(label_7,
-																				GroupLayout.DEFAULT_SIZE,
-																				GroupLayout.DEFAULT_SIZE,
-																				Short.MAX_VALUE)))
-														.addGroup(Alignment.LEADING,
-																gl_panelRepresentante.createSequentialGroup()
-																		.addGroup(gl_panelRepresentante
-																				.createParallelGroup(Alignment.LEADING)
-																				.addComponent(txtMovilRepre,
-																						GroupLayout.PREFERRED_SIZE,
-																						155, GroupLayout.PREFERRED_SIZE)
-																				.addComponent(label_2))
-																		.addPreferredGap(ComponentPlacement.RELATED)
-																		.addGroup(gl_panelRepresentante
-																				.createParallelGroup(Alignment.LEADING)
-																				.addComponent(lblTelfonofax)
-																				.addComponent(txtFaxRepre))))
-												.addPreferredGap(ComponentPlacement.RELATED)
-												.addGroup(gl_panelRepresentante.createParallelGroup(Alignment.LEADING)
-														.addComponent(label_4).addComponent(lblCp_1)
-														.addComponent(txtCpRepre, GroupLayout.DEFAULT_SIZE, 184,
-																Short.MAX_VALUE)
-														.addComponent(txtMailRepre, GroupLayout.DEFAULT_SIZE, 184,
-																Short.MAX_VALUE))))
-								.addContainerGap()));
-		gl_panelRepresentante.setVerticalGroup(gl_panelRepresentante.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 175, Short.MAX_VALUE)
-				.addGroup(gl_panelRepresentante.createSequentialGroup().addContainerGap()
-						.addGroup(gl_panelRepresentante.createParallelGroup(Alignment.BASELINE).addComponent(label_5)
-								.addComponent(label))
-						.addPreferredGap(ComponentPlacement.RELATED)
+			gl_panelRepresentante.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panelRepresentante.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(gl_panelRepresentante.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panelRepresentante.createSequentialGroup()
+							.addGroup(gl_panelRepresentante.createParallelGroup(Alignment.LEADING)
+								.addComponent(txtNombreApellidosRepre, GroupLayout.PREFERRED_SIZE, 377, GroupLayout.PREFERRED_SIZE)
+								.addComponent(label_5))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(gl_panelRepresentante.createParallelGroup(Alignment.LEADING)
+								.addComponent(label)
+								.addComponent(txtDniRepre, GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE)))
+						.addGroup(gl_panelRepresentante.createSequentialGroup()
+							.addGroup(gl_panelRepresentante.createParallelGroup(Alignment.LEADING)
+								.addComponent(label_6)
+								.addComponent(txtDireccionRepre, GroupLayout.PREFERRED_SIZE, 207, GroupLayout.PREFERRED_SIZE))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(gl_panelRepresentante.createParallelGroup(Alignment.LEADING)
+								.addComponent(label_7, GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
+								.addComponent(txtMunicipioRepre, GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)))
+						.addGroup(gl_panelRepresentante.createSequentialGroup()
+							.addGroup(gl_panelRepresentante.createParallelGroup(Alignment.LEADING)
+								.addComponent(lblCp_1)
+								.addComponent(txtCpRepre, GroupLayout.PREFERRED_SIZE, 153, GroupLayout.PREFERRED_SIZE))
+							.addGap(18)
+							.addGroup(gl_panelRepresentante.createParallelGroup(Alignment.LEADING)
+								.addComponent(txtMovilRepre, GroupLayout.PREFERRED_SIZE, 155, GroupLayout.PREFERRED_SIZE)
+								.addComponent(label_2))
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addGroup(gl_panelRepresentante.createParallelGroup(Alignment.LEADING, false)
+								.addGroup(gl_panelRepresentante.createSequentialGroup()
+									.addComponent(lblTelfonofax)
+									.addGap(46))
+								.addComponent(txtFaxRepre))))
+					.addGap(54))
+		);
+		gl_panelRepresentante.setVerticalGroup(
+			gl_panelRepresentante.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panelRepresentante.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(gl_panelRepresentante.createParallelGroup(Alignment.BASELINE)
+						.addComponent(label_5)
+						.addComponent(label))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_panelRepresentante.createParallelGroup(Alignment.BASELINE)
+						.addComponent(txtNombreApellidosRepre, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(txtDniRepre, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_panelRepresentante.createParallelGroup(Alignment.BASELINE)
+						.addComponent(label_6)
+						.addComponent(label_7))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_panelRepresentante.createParallelGroup(Alignment.BASELINE)
+						.addComponent(txtDireccionRepre, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(txtMunicipioRepre, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_panelRepresentante.createParallelGroup(Alignment.TRAILING)
+						.addComponent(lblTelfonofax)
 						.addGroup(gl_panelRepresentante.createParallelGroup(Alignment.BASELINE)
-								.addComponent(txtNombreApellidosRepre, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-										GroupLayout.PREFERRED_SIZE)
-								.addComponent(txtDniRepre, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-										GroupLayout.PREFERRED_SIZE))
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addGroup(gl_panelRepresentante.createParallelGroup(Alignment.BASELINE).addComponent(label_6)
-								.addComponent(label_7).addComponent(lblCp_1))
-						.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(label_2)
+							.addComponent(lblCp_1)))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_panelRepresentante.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panelRepresentante.createParallelGroup(Alignment.BASELINE)
-								.addComponent(txtDireccionRepre, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-										GroupLayout.PREFERRED_SIZE)
-								.addComponent(txtMunicipioRepre, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-										GroupLayout.PREFERRED_SIZE)
-								.addComponent(txtCpRepre, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-										GroupLayout.PREFERRED_SIZE))
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addGroup(gl_panelRepresentante.createParallelGroup(Alignment.BASELINE).addComponent(label_2)
-								.addComponent(lblTelfonofax).addComponent(label_4))
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addGroup(gl_panelRepresentante.createParallelGroup(Alignment.BASELINE)
-								.addComponent(txtMovilRepre, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-										GroupLayout.PREFERRED_SIZE)
-								.addComponent(txtFaxRepre, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-										GroupLayout.PREFERRED_SIZE)
-								.addComponent(txtMailRepre, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-										GroupLayout.PREFERRED_SIZE))
-						.addContainerGap(118, Short.MAX_VALUE)));
+							.addComponent(txtFaxRepre, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addComponent(txtMovilRepre, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(txtCpRepre, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+		);
 		panelRepresentante.setLayout(gl_panelRepresentante);
 		contentPane.setLayout(null);
 
@@ -732,11 +695,6 @@ public class VistaInscripcion extends JFrame {
 	}
 
 
-	public String getTxtMailRepre() {
-		return txtMailRepre.getText();
-	}
-
-
 	public String getTxtNombreApellidosRepre() {
 		return txtNombreApellidosRepre.getText();
 	}
@@ -786,13 +744,7 @@ public class VistaInscripcion extends JFrame {
 	}
 
 
-	public int getChckbxPropiedad() {
-		if(chckbxPropiedad.isSelected())
-			return 1;
-			
-			return 0;
-		
-	}
+
 
 
 	public int getChckbxChckbxMemoria() {
@@ -887,9 +839,6 @@ public class VistaInscripcion extends JFrame {
 		return txtFaxRepre.getText();
 	}
 
-	public String gettxtMailRepre() {
-		return txtMailRepre.getText();
-	}
 
 	public String gettxtNombreApellidosRepre() {
 		return txtNombreApellidosRepre.getText();

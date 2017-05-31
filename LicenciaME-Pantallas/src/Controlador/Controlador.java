@@ -4,6 +4,9 @@ import java.awt.Component;
 import java.awt.Container;
 import java.sql.Date;
 
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
+
 import Modelo.Modelo;
 import Modelo.ModeloIni;
 import Vista.VistaConfiguracion;
@@ -75,6 +78,12 @@ public class Controlador {
 
 	}
 
+	public void cerrarVentanaModificacion() {
+		vistaModificacion.dispose();
+		vistaModificacion = new VistaModificacion();
+		vistaModificacion.setVisible(false);
+
+	}
 	public void cerrarVentanaConfiguracion() {
 		vistaConfiguracion.dispose();
 	}
@@ -148,6 +157,17 @@ public class Controlador {
 		  
 		 }
 	  
+	  
+	  // Limpiar tabla
+	  public  void reiniciarJTable(javax.swing.JTable Tabla){
+	        DefaultTableModel modelo1 = (DefaultTableModel) Tabla.getModel();
+	        while(modelo1.getRowCount()>0)modelo1.removeRow(0);
+	 
+	        TableColumnModel modCol1 = Tabla.getColumnModel();
+	        while(modCol1.getColumnCount()>0)modCol1.removeColumn(modCol1.getColumn(0));
+	       MostrarTabla();
+	    }
+
 
 	public void MostrarTabla() {
 		modelo.ShowJTable();

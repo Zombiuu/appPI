@@ -1,15 +1,19 @@
 package Vista;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -23,16 +27,15 @@ import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.JTextPane;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.RowFilter;
-import javax.swing.UIManager;
+import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.SoftBevelBorder;
-import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
@@ -40,11 +43,6 @@ import com.toedter.calendar.JDateChooser;
 
 import Controlador.Controlador;
 import Modelo.Modelo;
-import javax.swing.ImageIcon;
-import java.awt.SystemColor;
-import javax.swing.SwingConstants;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 
 public class VistaPrincipal extends JFrame {
 	private JPanel contentPane;
@@ -95,30 +93,30 @@ public class VistaPrincipal extends JFrame {
 		Descripcion.setBorder(new LineBorder(new Color(0, 0, 0)));
 
 		JLabel lblRaznSocial = new JLabel("Descripci\u00F3n Actividad");
-		lblRaznSocial.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		lblRaznSocial.setFont(new Font("Tahoma", Font.BOLD, 11));
 
 		JLabel lblDocumentacinAportada = new JLabel("Documentaci\u00F3n aportada");
-		lblDocumentacinAportada.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		lblDocumentacinAportada.setFont(new Font("Tahoma", Font.BOLD, 11));
 
-		JCheckBox chckbxNewCheckBox = new JCheckBox("Fotocopia DNI / CIF / NIE");
-		chckbxNewCheckBox.setBackground(SystemColor.inactiveCaption);
-		chckbxNewCheckBox.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		JCheckBox chckbxFotoDniP = new JCheckBox("Fotocopia DNI / CIF / NIE");
+		chckbxFotoDniP.setBackground(SystemColor.inactiveCaption);
+		chckbxFotoDniP.setFont(new Font("Tahoma", Font.PLAIN, 11));
 
-		JCheckBox chckbxOtrasAutorizaciones = new JCheckBox("Otras Autorizaciones");
-		chckbxOtrasAutorizaciones.setBackground(SystemColor.inactiveCaption);
-		chckbxOtrasAutorizaciones.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		JCheckBox chckbxOtrasAutorizacionesP = new JCheckBox("Otras Autorizaciones");
+		chckbxOtrasAutorizacionesP.setBackground(SystemColor.inactiveCaption);
+		chckbxOtrasAutorizacionesP.setFont(new Font("Tahoma", Font.PLAIN, 11));
 
-		JCheckBox checkBox = new JCheckBox("Fotocopia impuesto de Actividades (Modelo 36)");
-		checkBox.setBackground(SystemColor.inactiveCaption);
-		checkBox.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		JCheckBox checkBoxFtoImpActP = new JCheckBox("Fotocopia impuesto de Actividades (Modelo 36)");
+		checkBoxFtoImpActP.setBackground(SystemColor.inactiveCaption);
+		checkBoxFtoImpActP.setFont(new Font("Tahoma", Font.PLAIN, 11));
 
-		JCheckBox chckbxFotocopiaEscrituras = new JCheckBox("Fotocopia Escrituras");
-		chckbxFotocopiaEscrituras.setBackground(SystemColor.inactiveCaption);
-		chckbxFotocopiaEscrituras.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		JCheckBox chckbxFotocopiaEscriturasP = new JCheckBox("Fotocopia Escrituras");
+		chckbxFotocopiaEscriturasP.setBackground(SystemColor.inactiveCaption);
+		chckbxFotocopiaEscriturasP.setFont(new Font("Tahoma", Font.PLAIN, 11));
 
-		JCheckBox chckbxJustificanteDePago = new JCheckBox("Justificante de Pago");
-		chckbxJustificanteDePago.setBackground(SystemColor.inactiveCaption);
-		chckbxJustificanteDePago.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		JCheckBox chckbxJustificanteDePagoP = new JCheckBox("Justificante de Pago");
+		chckbxJustificanteDePagoP.setBackground(SystemColor.inactiveCaption);
+		chckbxJustificanteDePagoP.setFont(new Font("Tahoma", Font.PLAIN, 11));
 
 		JLabel lblFechaDeSolicitud = new JLabel("Fecha de Solicitud");
 		lblFechaDeSolicitud.setFont(new Font("Tahoma", Font.PLAIN, 11));
@@ -127,21 +125,21 @@ public class VistaPrincipal extends JFrame {
 
 		JSeparator separator_1 = new JSeparator();
 
-		JDateChooser dateChooser_2 = new JDateChooser();
-		dateChooser_2.setDateFormatString("dd-MM-yyyy");
-		dateChooser_2.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		JDateChooser fechaSolicitudP = new JDateChooser();
+		fechaSolicitudP.setDateFormatString("dd-MM-yyyy");
+		fechaSolicitudP.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 
 		JLabel lblFechaPrevistaActividad = new JLabel("Fecha prevista actividad");
 		lblFechaPrevistaActividad.setFont(new Font("Tahoma", Font.PLAIN, 11));
 
-		JDateChooser dateChooser_3 = new JDateChooser();
-		dateChooser_3.setDateFormatString("dd-MM-yyyy");
-		dateChooser_3.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		JDateChooser fechaInicioSolicitudP = new JDateChooser();
+		fechaInicioSolicitudP.setDateFormatString("dd-MM-yyyy");
+		fechaInicioSolicitudP.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 
-		JLabel lblNewLabel_1 = new JLabel("New label");
+		JLabel lblDescripcionP = new JLabel("New label");
 
 		JLabel lblNewLabel_4 = new JLabel("Informaci\u00F3n adicional");
-		lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblNewLabel_4.setFont(new Font("Tahoma", Font.BOLD, 18));
 		GroupLayout gl_Descripcion = new GroupLayout(Descripcion);
 		gl_Descripcion
 				.setHorizontalGroup(gl_Descripcion.createParallelGroup(Alignment.LEADING)
@@ -165,28 +163,28 @@ public class VistaPrincipal extends JFrame {
 										.addGroup(gl_Descripcion.createSequentialGroup().addGroup(gl_Descripcion
 												.createParallelGroup(Alignment.LEADING)
 												.addGroup(gl_Descripcion.createSequentialGroup()
-														.addComponent(chckbxNewCheckBox, GroupLayout.DEFAULT_SIZE,
+														.addComponent(chckbxFotoDniP, GroupLayout.DEFAULT_SIZE,
 																GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 														.addPreferredGap(ComponentPlacement.RELATED).addComponent(
-																chckbxJustificanteDePago, GroupLayout.DEFAULT_SIZE,
+																chckbxJustificanteDePagoP, GroupLayout.DEFAULT_SIZE,
 																GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-												.addComponent(checkBox, GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE))
+												.addComponent(checkBoxFtoImpActP, GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE))
 												.addPreferredGap(ComponentPlacement.RELATED)
 												.addGroup(gl_Descripcion.createParallelGroup(Alignment.LEADING, false)
-														.addComponent(chckbxFotocopiaEscrituras,
+														.addComponent(chckbxFotocopiaEscriturasP,
 																GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,
 																Short.MAX_VALUE)
-														.addComponent(chckbxOtrasAutorizaciones,
+														.addComponent(chckbxOtrasAutorizacionesP,
 																GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)))
 										.addGroup(gl_Descripcion.createSequentialGroup()
 												.addGroup(gl_Descripcion.createParallelGroup(Alignment.TRAILING)
 														.addComponent(lblFechaDeSolicitud, Alignment.LEADING,
 																GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
-														.addComponent(dateChooser_2, Alignment.LEADING,
+														.addComponent(fechaSolicitudP, Alignment.LEADING,
 																GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE))
 												.addGroup(gl_Descripcion.createParallelGroup(Alignment.LEADING)
 														.addGroup(gl_Descripcion.createSequentialGroup().addGap(18)
-																.addComponent(dateChooser_3, GroupLayout.DEFAULT_SIZE,
+																.addComponent(fechaInicioSolicitudP, GroupLayout.DEFAULT_SIZE,
 																		162, Short.MAX_VALUE)
 																.addGap(94))
 														.addGroup(gl_Descripcion.createSequentialGroup().addGap(21)
@@ -199,28 +197,28 @@ public class VistaPrincipal extends JFrame {
 												.addComponent(lblRaznSocial, GroupLayout.DEFAULT_SIZE, 158,
 														Short.MAX_VALUE)
 												.addGap(289))
-								.addGroup(gl_Descripcion.createSequentialGroup().addComponent(lblNewLabel_1)
+								.addGroup(gl_Descripcion.createSequentialGroup().addComponent(lblDescripcionP)
 										.addContainerGap(401, Short.MAX_VALUE)))));
 		gl_Descripcion.setVerticalGroup(gl_Descripcion.createParallelGroup(Alignment.LEADING).addGroup(gl_Descripcion
 				.createSequentialGroup().addContainerGap().addComponent(lblNewLabel_4)
 				.addPreferredGap(ComponentPlacement.RELATED)
 				.addComponent(lblRaznSocial, GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
-				.addPreferredGap(ComponentPlacement.RELATED).addComponent(lblNewLabel_1).addGap(35)
+				.addPreferredGap(ComponentPlacement.RELATED).addComponent(lblDescripcionP).addGap(35)
 				.addComponent(lblDocumentacinAportada, GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
 				.addPreferredGap(ComponentPlacement.RELATED)
 				.addGroup(gl_Descripcion.createParallelGroup(Alignment.BASELINE)
-						.addComponent(chckbxNewCheckBox, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,
+						.addComponent(chckbxFotoDniP, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,
 								Short.MAX_VALUE)
-						.addComponent(chckbxJustificanteDePago, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,
+						.addComponent(chckbxJustificanteDePagoP, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,
 								Short.MAX_VALUE)
-						.addComponent(chckbxFotocopiaEscrituras, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,
+						.addComponent(chckbxFotocopiaEscriturasP, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,
 								Short.MAX_VALUE))
 				.addPreferredGap(ComponentPlacement.RELATED)
 				.addGroup(
 						gl_Descripcion.createParallelGroup(Alignment.BASELINE)
-								.addComponent(checkBox, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,
+								.addComponent(checkBoxFtoImpActP, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,
 										Short.MAX_VALUE)
-								.addComponent(chckbxOtrasAutorizaciones, GroupLayout.DEFAULT_SIZE,
+								.addComponent(chckbxOtrasAutorizacionesP, GroupLayout.DEFAULT_SIZE,
 										GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 				.addGap(9)
 				.addComponent(separator, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
@@ -231,9 +229,9 @@ public class VistaPrincipal extends JFrame {
 						.addComponent(lblFechaPrevistaActividad, GroupLayout.DEFAULT_SIZE, 17, Short.MAX_VALUE))
 				.addPreferredGap(ComponentPlacement.RELATED)
 				.addGroup(gl_Descripcion.createParallelGroup(Alignment.LEADING, false)
-						.addComponent(dateChooser_3, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,
+						.addComponent(fechaInicioSolicitudP, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,
 								Short.MAX_VALUE)
-						.addComponent(dateChooser_2, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,
+						.addComponent(fechaSolicitudP, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,
 								Short.MAX_VALUE))
 				.addPreferredGap(ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
 				.addComponent(separator_1, GroupLayout.PREFERRED_SIZE, 7, GroupLayout.PREFERRED_SIZE).addGap(32)));
@@ -339,7 +337,9 @@ public class VistaPrincipal extends JFrame {
 		JButton btnReset = new JButton("Limpiar b\u00FAsqueda");
 		btnReset.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				controlador.MostrarTabla();
+				controlador.reiniciarJTable(TablaInfo);
+				
+				
 			}
 		});
 		btnReset.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -349,35 +349,36 @@ public class VistaPrincipal extends JFrame {
 		panelLicencia.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
 
 		JLabel lblNewLabel_3 = new JLabel("Buscador");
-		lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblNewLabel_3.setFont(new Font("Tahoma", Font.BOLD, 18));
 		GroupLayout gl_Main = new GroupLayout(Main);
-		gl_Main.setHorizontalGroup(gl_Main.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_Main.createSequentialGroup().addContainerGap()
-						.addGroup(gl_Main.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_Main.createSequentialGroup()
-										.addPreferredGap(ComponentPlacement.RELATED, 8, Short.MAX_VALUE).addGroup(
-												gl_Main.createParallelGroup(Alignment.TRAILING, false)
-														.addComponent(panelLicencia, GroupLayout.PREFERRED_SIZE, 738,
-																GroupLayout.PREFERRED_SIZE)
-														.addGroup(gl_Main.createSequentialGroup()
-																.addComponent(btnBusqueda, GroupLayout.DEFAULT_SIZE,
-																		GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-																.addPreferredGap(ComponentPlacement.RELATED)
-																.addComponent(btnReset, GroupLayout.PREFERRED_SIZE, 153,
-																		GroupLayout.PREFERRED_SIZE)
-																.addGap(497)))
-										.addGap(28))
-								.addGroup(gl_Main.createSequentialGroup().addComponent(lblNewLabel_3)
-										.addContainerGap(702, Short.MAX_VALUE)))));
-		gl_Main.setVerticalGroup(gl_Main.createParallelGroup(Alignment.TRAILING).addGroup(gl_Main
-				.createSequentialGroup().addGap(19).addComponent(lblNewLabel_3)
-				.addPreferredGap(ComponentPlacement.UNRELATED)
-				.addComponent(panelLicencia, GroupLayout.PREFERRED_SIZE, 168, GroupLayout.PREFERRED_SIZE)
-				.addPreferredGap(ComponentPlacement.RELATED)
-				.addGroup(gl_Main.createParallelGroup(Alignment.BASELINE)
+		gl_Main.setHorizontalGroup(
+			gl_Main.createParallelGroup(Alignment.LEADING)
+				.addGroup(Alignment.TRAILING, gl_Main.createSequentialGroup()
+					.addContainerGap(18, Short.MAX_VALUE)
+					.addGroup(gl_Main.createParallelGroup(Alignment.LEADING)
+						.addComponent(lblNewLabel_3)
+						.addGroup(gl_Main.createParallelGroup(Alignment.TRAILING, false)
+							.addComponent(panelLicencia, GroupLayout.PREFERRED_SIZE, 738, GroupLayout.PREFERRED_SIZE)
+							.addGroup(gl_Main.createSequentialGroup()
+								.addComponent(btnBusqueda, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addComponent(btnReset, GroupLayout.PREFERRED_SIZE, 153, GroupLayout.PREFERRED_SIZE)
+								.addGap(497))))
+					.addGap(28))
+		);
+		gl_Main.setVerticalGroup(
+			gl_Main.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_Main.createSequentialGroup()
+					.addGap(19)
+					.addComponent(lblNewLabel_3)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(panelLicencia, GroupLayout.PREFERRED_SIZE, 168, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_Main.createParallelGroup(Alignment.BASELINE)
 						.addComponent(btnBusqueda, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 						.addComponent(btnReset, GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE))
-				.addContainerGap()));
+					.addContainerGap())
+		);
 
 		JLabel tipoLabel = new JLabel("Tipo de Licencia");
 		tipoLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -542,7 +543,7 @@ public class VistaPrincipal extends JFrame {
 	public void onLoadTable() {
 		controlador.MostrarTabla();
 	}
-
+	
 	public TableModel getTablaInfo() {
 		return TablaInfo.getModel();
 	}

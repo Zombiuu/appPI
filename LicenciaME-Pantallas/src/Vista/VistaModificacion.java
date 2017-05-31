@@ -52,7 +52,6 @@ public class VistaModificacion extends JFrame {
 	private JTextField txtCpRepre;
 	private JTextField txtMovilRepre;
 	private JTextField txtFaxRepre;
-	private JTextField txtMailRepre;
 	private JTextField txtNombreApellidosRepre;
 	private JTextField txtDireccionRepre;
 	private JTextField txtMunicipioRepre;
@@ -77,6 +76,7 @@ public class VistaModificacion extends JFrame {
 	private JCheckBox chckbxLicenciaObra;
 	private JCheckBox chckbxOtrasAutorizaciones;
 	private JCheckBox chckbxRequired;
+	private JComboBox comboBoxEstado;
 
 	/**
 	 * Create the frame.
@@ -255,7 +255,7 @@ public class VistaModificacion extends JFrame {
 												JLabel lblTipoSuelo = new JLabel("Tipo Suelo");
 												
 												comboSuelo = new JComboBox();
-												comboSuelo.setModel(new DefaultComboBoxModel(new String[] {"Seleccione Tipo", "Urbano", "Rustico"}));
+												comboSuelo.setModel(new DefaultComboBoxModel(new String[] {"Seleccione Tipo", "Urbano", "R\u00FAstico"}));
 												GroupLayout gl_panelLocal = new GroupLayout(panelLocal);
 												gl_panelLocal.setHorizontalGroup(
 													gl_panelLocal.createParallelGroup(Alignment.LEADING)
@@ -269,13 +269,13 @@ public class VistaModificacion extends JFrame {
 																		.addComponent(txtReferencia, GroupLayout.PREFERRED_SIZE, 131, GroupLayout.PREFERRED_SIZE)
 																		.addComponent(lblReferenciaCatastral))
 																	.addPreferredGap(ComponentPlacement.UNRELATED)
-																	.addGroup(gl_panelLocal.createParallelGroup(Alignment.LEADING, false)
-																		.addComponent(lblTipo, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-																		.addComponent(comboTipo, 0, 146, Short.MAX_VALUE))
+																	.addGroup(gl_panelLocal.createParallelGroup(Alignment.LEADING)
+																		.addComponent(lblTipo, GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+																		.addComponent(comboTipo, 0, 180, Short.MAX_VALUE))
 																	.addPreferredGap(ComponentPlacement.RELATED)
-																	.addGroup(gl_panelLocal.createParallelGroup(Alignment.LEADING, false)
-																		.addComponent(lblTipoSuelo, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-																		.addComponent(comboSuelo, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+																	.addGroup(gl_panelLocal.createParallelGroup(Alignment.LEADING)
+																		.addComponent(lblTipoSuelo)
+																		.addComponent(comboSuelo, GroupLayout.PREFERRED_SIZE, 173, GroupLayout.PREFERRED_SIZE))))
 															.addContainerGap())
 												);
 												gl_panelLocal.setVerticalGroup(
@@ -285,16 +285,20 @@ public class VistaModificacion extends JFrame {
 															.addGap(12)
 															.addComponent(txtDescrAct, GroupLayout.PREFERRED_SIZE, 44, GroupLayout.PREFERRED_SIZE)
 															.addPreferredGap(ComponentPlacement.RELATED)
-															.addGroup(gl_panelLocal.createParallelGroup(Alignment.BASELINE)
-																.addComponent(lblTipo)
-																.addComponent(lblReferenciaCatastral)
-																.addComponent(lblTipoSuelo))
-															.addPreferredGap(ComponentPlacement.RELATED)
-															.addGroup(gl_panelLocal.createParallelGroup(Alignment.BASELINE)
-																.addComponent(txtReferencia, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-																.addComponent(comboTipo, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
-																.addComponent(comboSuelo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-															.addContainerGap(36, Short.MAX_VALUE))
+															.addGroup(gl_panelLocal.createParallelGroup(Alignment.LEADING)
+																.addGroup(gl_panelLocal.createSequentialGroup()
+																	.addGroup(gl_panelLocal.createParallelGroup(Alignment.BASELINE)
+																		.addComponent(lblTipo)
+																		.addComponent(lblReferenciaCatastral))
+																	.addPreferredGap(ComponentPlacement.RELATED)
+																	.addGroup(gl_panelLocal.createParallelGroup(Alignment.BASELINE)
+																		.addComponent(txtReferencia, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+																		.addComponent(comboTipo, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)))
+																.addGroup(gl_panelLocal.createSequentialGroup()
+																	.addComponent(lblTipoSuelo)
+																	.addPreferredGap(ComponentPlacement.RELATED)
+																	.addComponent(comboSuelo, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)))
+															.addContainerGap(21, Short.MAX_VALUE))
 												);
 												panelLocal.setLayout(gl_panelLocal);
 		
@@ -325,13 +329,18 @@ public class VistaModificacion extends JFrame {
 				JButton btnCancelar = new JButton("Cancelar");
 				btnCancelar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						controlador.cerrarVentanaInscripcion();
+						controlador.cerrarVentanaModificacion();
 					}
 				});
 				btnCancelar.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		
+		comboBoxEstado = new JComboBox();
+		comboBoxEstado.setModel(new DefaultComboBoxModel(new String[] {"Seleccione Estado", "En proceso", "Aceptada", "Rechazada", "Archivada"}));
+		
+		JLabel lblEstado = new JLabel("Estado");
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
-			gl_panel.createParallelGroup(Alignment.TRAILING)
+			gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel.createSequentialGroup()
 					.addGap(332)
 					.addComponent(btnEnviar, GroupLayout.PREFERRED_SIZE, 96, GroupLayout.PREFERRED_SIZE)
@@ -341,17 +350,24 @@ public class VistaModificacion extends JFrame {
 					.addContainerGap(40, Short.MAX_VALUE)
 					.addComponent(panelDoc, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap())
-				.addGroup(Alignment.LEADING, gl_panel.createSequentialGroup()
+				.addGroup(gl_panel.createSequentialGroup()
 					.addGap(40)
-					.addComponent(panelLocal, 0, 0, Short.MAX_VALUE)
+					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+						.addComponent(lblEstado)
+						.addComponent(panelLocal, 0, 0, Short.MAX_VALUE)
+						.addComponent(comboBoxEstado, GroupLayout.PREFERRED_SIZE, 172, GroupLayout.PREFERRED_SIZE))
 					.addContainerGap())
 		);
 		gl_panel.setVerticalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(panelLocal, GroupLayout.PREFERRED_SIZE, 160, GroupLayout.PREFERRED_SIZE)
-					.addGap(43)
+					.addComponent(panelLocal, GroupLayout.PREFERRED_SIZE, 145, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(lblEstado)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(comboBoxEstado, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addGap(12)
 					.addComponent(panelDoc, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
@@ -398,13 +414,6 @@ public class VistaModificacion extends JFrame {
 		JLabel lblTelfonofax = new JLabel("Tel\u00E9fono/FAX");
 		lblTelfonofax.setEnabled(false);
 
-		txtMailRepre = new JTextField();
-		txtMailRepre.setEnabled(false);
-		txtMailRepre.setColumns(10);
-
-		JLabel label_4 = new JLabel("Direcci\u00F3n e-mail");
-		label_4.setEnabled(false);
-
 		txtNombreApellidosRepre = new JTextField();
 		txtNombreApellidosRepre.setEnabled(false);
 		txtNombreApellidosRepre.setColumns(10);
@@ -427,91 +436,74 @@ public class VistaModificacion extends JFrame {
 		label_7.setEnabled(false);
 		GroupLayout gl_panelRepresentante = new GroupLayout(panelRepresentante);
 		gl_panelRepresentante.setHorizontalGroup(
-				gl_panelRepresentante.createParallelGroup(Alignment.LEADING).addGap(0, 532, Short.MAX_VALUE)
-						.addGroup(gl_panelRepresentante
-								.createSequentialGroup().addContainerGap().addGroup(gl_panelRepresentante
-										.createParallelGroup(Alignment.LEADING).addGroup(gl_panelRepresentante
-												.createSequentialGroup()
-												.addGroup(gl_panelRepresentante.createParallelGroup(Alignment.LEADING)
-														.addComponent(txtNombreApellidosRepre, GroupLayout.PREFERRED_SIZE, 377,
-																GroupLayout.PREFERRED_SIZE)
-														.addComponent(label_5))
-												.addPreferredGap(ComponentPlacement.RELATED)
-												.addGroup(gl_panelRepresentante.createParallelGroup(Alignment.LEADING)
-														.addComponent(label).addComponent(txtDniRepre,
-																GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)))
-										.addGroup(gl_panelRepresentante.createSequentialGroup()
-												.addGroup(gl_panelRepresentante
-														.createParallelGroup(Alignment.TRAILING, false)
-														.addGroup(Alignment.LEADING, gl_panelRepresentante
-																.createSequentialGroup()
-																.addGroup(gl_panelRepresentante
-																		.createParallelGroup(Alignment.LEADING)
-																		.addComponent(label_6).addComponent(txtDireccionRepre,
-																				GroupLayout.PREFERRED_SIZE, 207,
-																				GroupLayout.PREFERRED_SIZE))
-																.addPreferredGap(ComponentPlacement.RELATED)
-																.addGroup(gl_panelRepresentante
-																		.createParallelGroup(Alignment.LEADING, false)
-																		.addComponent(txtMunicipioRepre).addComponent(label_7,
-																				GroupLayout.DEFAULT_SIZE,
-																				GroupLayout.DEFAULT_SIZE,
-																				Short.MAX_VALUE)))
-														.addGroup(Alignment.LEADING,
-																gl_panelRepresentante.createSequentialGroup()
-																		.addGroup(gl_panelRepresentante
-																				.createParallelGroup(Alignment.LEADING)
-																				.addComponent(txtMovilRepre,
-																						GroupLayout.PREFERRED_SIZE,
-																						155, GroupLayout.PREFERRED_SIZE)
-																				.addComponent(label_2))
-																		.addPreferredGap(ComponentPlacement.RELATED)
-																		.addGroup(gl_panelRepresentante
-																				.createParallelGroup(Alignment.LEADING)
-																				.addComponent(lblTelfonofax)
-																				.addComponent(txtFaxRepre))))
-												.addPreferredGap(ComponentPlacement.RELATED)
-												.addGroup(gl_panelRepresentante.createParallelGroup(Alignment.LEADING)
-														.addComponent(label_4).addComponent(lblCp_1)
-														.addComponent(txtCpRepre, GroupLayout.DEFAULT_SIZE, 184,
-																Short.MAX_VALUE)
-														.addComponent(txtMailRepre, GroupLayout.DEFAULT_SIZE, 184,
-																Short.MAX_VALUE))))
-								.addContainerGap()));
-		gl_panelRepresentante.setVerticalGroup(gl_panelRepresentante.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 175, Short.MAX_VALUE)
-				.addGroup(gl_panelRepresentante.createSequentialGroup().addContainerGap()
-						.addGroup(gl_panelRepresentante.createParallelGroup(Alignment.BASELINE).addComponent(label_5)
-								.addComponent(label))
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addGroup(gl_panelRepresentante.createParallelGroup(Alignment.BASELINE)
-								.addComponent(txtNombreApellidosRepre, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-										GroupLayout.PREFERRED_SIZE)
-								.addComponent(txtDniRepre, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-										GroupLayout.PREFERRED_SIZE))
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addGroup(gl_panelRepresentante.createParallelGroup(Alignment.BASELINE).addComponent(label_6)
-								.addComponent(label_7).addComponent(lblCp_1))
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addGroup(gl_panelRepresentante.createParallelGroup(Alignment.BASELINE)
-								.addComponent(txtDireccionRepre, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-										GroupLayout.PREFERRED_SIZE)
-								.addComponent(txtMunicipioRepre, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-										GroupLayout.PREFERRED_SIZE)
-								.addComponent(txtCpRepre, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-										GroupLayout.PREFERRED_SIZE))
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addGroup(gl_panelRepresentante.createParallelGroup(Alignment.BASELINE).addComponent(label_2)
-								.addComponent(lblTelfonofax).addComponent(label_4))
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addGroup(gl_panelRepresentante.createParallelGroup(Alignment.BASELINE)
-								.addComponent(txtMovilRepre, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-										GroupLayout.PREFERRED_SIZE)
-								.addComponent(txtFaxRepre, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-										GroupLayout.PREFERRED_SIZE)
-								.addComponent(txtMailRepre, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-										GroupLayout.PREFERRED_SIZE))
-						.addContainerGap(118, Short.MAX_VALUE)));
+			gl_panelRepresentante.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panelRepresentante.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(gl_panelRepresentante.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panelRepresentante.createSequentialGroup()
+							.addGroup(gl_panelRepresentante.createParallelGroup(Alignment.LEADING)
+								.addComponent(txtNombreApellidosRepre, GroupLayout.PREFERRED_SIZE, 377, GroupLayout.PREFERRED_SIZE)
+								.addComponent(label_5))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(gl_panelRepresentante.createParallelGroup(Alignment.LEADING)
+								.addComponent(label)
+								.addComponent(txtDniRepre, GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)))
+						.addGroup(Alignment.TRAILING, gl_panelRepresentante.createSequentialGroup()
+							.addGroup(gl_panelRepresentante.createParallelGroup(Alignment.LEADING)
+								.addComponent(label_6)
+								.addComponent(txtDireccionRepre, GroupLayout.PREFERRED_SIZE, 207, GroupLayout.PREFERRED_SIZE))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(gl_panelRepresentante.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_panelRepresentante.createSequentialGroup()
+									.addComponent(label_7)
+									.addPreferredGap(ComponentPlacement.RELATED))
+								.addComponent(txtMunicipioRepre, GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)))
+						.addGroup(Alignment.TRAILING, gl_panelRepresentante.createSequentialGroup()
+							.addGroup(gl_panelRepresentante.createParallelGroup(Alignment.LEADING)
+								.addComponent(txtCpRepre, GroupLayout.PREFERRED_SIZE, 144, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblCp_1))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(gl_panelRepresentante.createParallelGroup(Alignment.LEADING)
+								.addComponent(txtMovilRepre, GroupLayout.PREFERRED_SIZE, 155, GroupLayout.PREFERRED_SIZE)
+								.addComponent(label_2))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(gl_panelRepresentante.createParallelGroup(Alignment.LEADING)
+								.addComponent(lblTelfonofax)
+								.addComponent(txtFaxRepre, 175, 175, 175))
+							.addPreferredGap(ComponentPlacement.RELATED)))
+					.addGap(11))
+		);
+		gl_panelRepresentante.setVerticalGroup(
+			gl_panelRepresentante.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panelRepresentante.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(gl_panelRepresentante.createParallelGroup(Alignment.BASELINE)
+						.addComponent(label_5)
+						.addComponent(label))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_panelRepresentante.createParallelGroup(Alignment.BASELINE)
+						.addComponent(txtNombreApellidosRepre, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(txtDniRepre, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_panelRepresentante.createParallelGroup(Alignment.BASELINE)
+						.addComponent(label_6)
+						.addComponent(label_7))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_panelRepresentante.createParallelGroup(Alignment.BASELINE)
+						.addComponent(txtDireccionRepre, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(txtMunicipioRepre, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_panelRepresentante.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblCp_1)
+						.addComponent(label_2)
+						.addComponent(lblTelfonofax))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_panelRepresentante.createParallelGroup(Alignment.BASELINE)
+						.addComponent(txtCpRepre, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(txtMovilRepre, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(txtFaxRepre, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+		);
 		panelRepresentante.setLayout(gl_panelRepresentante);
 		contentPane.setLayout(null);
 
@@ -732,9 +724,6 @@ public class VistaModificacion extends JFrame {
 	}
 
 
-	public String getTxtMailRepre() {
-		return txtMailRepre.getText();
-	}
 
 
 	public String getTxtNombreApellidosRepre() {
@@ -887,9 +876,6 @@ public class VistaModificacion extends JFrame {
 		return txtFaxRepre.getText();
 	}
 
-	public String gettxtMailRepre() {
-		return txtMailRepre.getText();
-	}
 
 	public String gettxtNombreApellidosRepre() {
 		return txtNombreApellidosRepre.getText();
@@ -932,15 +918,66 @@ public class VistaModificacion extends JFrame {
 	}
 
 	public  void datosRegistro(){
+		
+		//persona
+		
 		txtDNI.setText(Integer.toString(modelo.getTxtDni()));
 		txtNombre.setText(modelo.getTxtNombre());
-		txtReferencia.setText(Integer.toString(modelo.getTxtReferencia()));
 		txtCp.setText(Integer.toString(modelo.getTxtCp()));
 		txtDireccion.setText(modelo.getTxtDireccion());
 		txtFax.setText(Integer.toString(modelo.getTxtFax()));
 		txtMail.setText(modelo.getTxtMail());
 		txtMovil.setText(Integer.toString(modelo.getTxtMovil()));
 		txtMunicipio.setText(modelo.getTxtMunicipio());
+		
+		// representante
+		
+		txtDniRepre.setText(Integer.toString(modelo.getTxtDniRepre()));
+		txtNombreApellidosRepre.setText(modelo.getTxtNombreApellidosRepre());
+		txtCpRepre.setText(Integer.toString(modelo.getTxtCpRepre()));
+		txtDireccionRepre.setText(modelo.getTxtDireccionRepre());
+		txtFaxRepre.setText(Integer.toString(modelo.getTxtFaxRepre()));
+		txtMovilRepre.setText(Integer.toString(modelo.getTxtMovilRepre()));
+		txtMunicipioRepre.setText(modelo.getTxtMunicipioRepre());
+		
+		//Solucitud
+		txtReferencia.setText(Integer.toString(modelo.getTxtRefSolicitud()));
+		txtDescrAct.setText(modelo.getTxtDescSolicitud());
+		comboTipo.setSelectedItem(modelo.getTxtTipoSolicitud());
+		comboBoxEstado.setSelectedItem(modelo.getTxtcomboBoxEstado());
+		comboSuelo.setSelectedItem(modelo.getTxtSueloSolicitud());
+		fechaSolicitud.setDate(modelo.getTxtFechaSolicitud());
+		fechaActividad.setDate(modelo.getTxtFechaIniSolicitud());
+		
+		
+		if (modelo.getTxtFtoActSolicitud()==1) {
+			chckbxFotocopiaImpuestoActividades.setSelected(true);
+		}
+		if (modelo.getTxtFtoDniSolicitud()==1) {
+			chckbxFotocopiaDNI.setSelected(true);
+		}
+		if (modelo.getTxtFtoEscriSolicitud()==1) {
+			chckbxEscritura.setSelected(true);
+		}
+		if (modelo.getTxtJustPagoSolicitud()==1) {
+			chckbxJustificantePago.setSelected(true);
+		}
+		if (modelo.getTxtLicObraSolicitud()==1) {
+			chckbxLicenciaObra.setSelected(true);
+		}
+		if (modelo.getTxtMemActSolicitud()==1) {
+			chckbxMemoria.setSelected(true);
+		}
+		if (modelo.getTxtAutoSolicitud()==1) {
+			chckbxOtrasAutorizaciones.setSelected(true);
+		}
+		if (modelo.getTxtCertColegSolicitud()==1) {
+			chckbxCertificadoColegio.setSelected(true);
+		}
+		if (modelo.getTxtPlanosSolicitud()==1) {
+			chckbxPlanoAcotadoDel.setSelected(true);
+		}
+		
 	}
 	
 	public void setControlador(Controlador controlador) {

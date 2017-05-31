@@ -5,19 +5,19 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Properties;
 
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-
-import com.toedter.calendar.JDateChooser;
 
 import Vista.VistaConfiguracion;
 import Vista.VistaInscripcion;
@@ -46,7 +46,6 @@ public class Modelo {
 	private int txtMovil;
 	private int txtFax;
 	private String txtNombre;
-	private int txtReferencia;
 	private String txtDireccion;
 	private String txtMunicipio;
 	private String txtMail;
@@ -58,8 +57,23 @@ public class Modelo {
 	private int txtFaxRepre;
 	private String txtDireccionRepre;
 	private String txtMunicipioRepre;
-	private String txtMailRepre;
-	
+	// variables solicitud vistaModificacion
+	private String txtDescSolicitud;
+	private int txtRefSolicitud;
+	private String txtSueloSolicitud;
+	private String txtTipoSolicitud;
+	private String txtFechaSolicitud;
+	private String txtFechaIniSolicitud;
+	private String comboBoxEstado;
+	private int txtFtoDniSolicitud;
+	private int txtFtoActSolicitud;
+	private int txtFtoEscriSolicitud;
+	private int txtJustPagoSolicitud;
+	private int txtMemActSolicitud;
+	private int txtPlanosSolicitud;
+	private int txtAutoSolicitud;
+	private int txtLicObraSolicitud;
+	private int txtCertColegSolicitud;
 
 	public Modelo() {
 		super();
@@ -340,42 +354,50 @@ public class Modelo {
 
 				System.exit(-1);
 			}
-			//PreparedStatement ps = con.prepareStatement(
-			//		"SELECT persona.cif as cif,persona.nombre as nombre, solicitud.ref_catastral as ref FROM persona JOIN titularidad ON persona.id_persona = titularidad.persona JOIN solicitud ON titularidad.solicitud = solicitud.id_solicitud WHERE solicitud.id_solicitud = ?");
 			PreparedStatement ps = con.prepareStatement(
-			"SELECT persona.cif as cifPersona, persona.direccion as direccionPersona, persona.municipio as municipioPersona, persona.cp as cpPersona, persona.tlf_fijo as fijoPersona, persona.tlf_movil as movilPersona, persona.nombre as nombrePersona, persona.email as emailPersona, representante.nif_nie as nifRepre, representante.direccion as direccionRepre, representante.municipio as municipioRepre, representante.cp as cpRepre, representante.tlf_fijo as fijoRepre, representante.tlf_movil as movilRepre, representante.nombre as nombreRepre, solicitud.ref_catastral as refSolicitud FROM persona JOIN titularidad ON persona.id_persona = titularidad.persona JOIN solicitud ON titularidad.solicitud = solicitud.id_solicitud JOIN representa ON persona.id_persona = representa.persona JOIN representante ON representante.id_representante = representa.representante WHERE persona.id_persona = ?");
+					"SELECT persona.cif as cifPersona,persona.direccion as direccionPersona,persona.municipio as municipioPersona,persona.cp as cpPersona,solicitud.estado as estadoSolicitud,persona.tlf_fijo as fijoPersona,persona.tlf_movil as movilPersona,persona.nombre as nombrePersona,persona.email as emailPersona,representante.nif_nie as nifRepre,representante.direccion as direccionRepre,representante.municipio as municipioRepre,representante.cp as cpRepre,representante.tlf_fijo as fijoRepre,representante.tlf_movil as movilRepre,representante.nombre as nombreRepre,solicitud.desc_actividad as descSolicitud,solicitud.ref_catastral as refSolicitud,solicitud.tipo_suelo as sueloSolicitud,solicitud.tipo as tipoSolicitud,solicitud.fecha as fechaSolicitud,solicitud.fecha_inicio as fechaIniSolicitud,solicitud.fotocopia_dni as ftoDniSolicitud,solicitud.fotocopia_imp_actividades as ftoActSolicitud,solicitud.fotocopia_escritura as ftoEscriSolicitud,solicitud.justificante_pago as justPagoSolicitud,solicitud.memoria_actividad as memActSolicitud,solicitud.planos as planosSolicitud,solicitud.otras_autorizaciones as autoSolicitud,solicitud.licencia_obra as licObraSolicitud,solicitud.certificado_colegio_oficial as certColegSolicitud FROM persona JOIN titularidad ON persona.id_persona = titularidad.persona JOIN solicitud ON titularidad.solicitud = solicitud.id_solicitud LEFT JOIN representa ON persona.id_persona = representa.persona LEFT JOIN representante ON representante.id_representante = representa.representante WHERE solicitud.id_solicitud = ?");
+
 			ps.setInt(1, nRegistro);
 			ResultSet rset = ps.executeQuery();
 
 			int z = 0;
 			while (rset.next()) {
 				// persona
-				txtDni = rset.getInt("cif");
-				txtNombre = rset.getString("nombre");
-				txtCp = rset.getInt("cp");
-				txtMunicipio = rset.getString("municipio");
-				txtDireccion = rset.getString("direccion");
-				txtFax = rset.getInt("tlf_fijo");
-				txtMail = rset.getString("email");
-				txtMovil = rset.getInt("tlf_movil");
-				//representante
-				
-				txtDniRepre = rset.getInt("cif");
-				txtNombreApellidosRepre = rset.getString("nombre");
-				txtCpRepre = rset.getInt("cp");
-				txtMunicipioRepre = rset.getString("municipio");
-				txtDireccionRepre = rset.getString("direccion");
-				txtFaxRepre = rset.getInt("tlf_fijo");
-				txtMailRepre = rset.getString("email");
-				txtMovilRepre = rset.getInt("tlf_movil");
-				
-				
-				//solicitud
-				
-				
-				
-				txtReferencia = rset.getInt("ref");
-				
+				txtDni = rset.getInt("cifPersona");
+				txtNombre = rset.getString("nombrePersona");
+				txtCp = rset.getInt("cpPersona");
+				txtMunicipio = rset.getString("municipioPersona");
+				txtDireccion = rset.getString("direccionPersona");
+				txtFax = rset.getInt("fijoPersona");
+				txtMail = rset.getString("emailPersona");
+				txtMovil = rset.getInt("movilPersona");
+				// representante
+
+				txtDniRepre = rset.getInt("nifRepre");
+				txtNombreApellidosRepre = rset.getString("nombreRepre");
+				txtCpRepre = rset.getInt("cpRepre");
+				txtMunicipioRepre = rset.getString("municipioRepre");
+				txtDireccionRepre = rset.getString("direccionRepre");
+				txtFaxRepre = rset.getInt("fijoRepre");
+				txtMovilRepre = rset.getInt("movilRepre");
+
+				// solicitud
+				txtDescSolicitud = rset.getString("descSolicitud");
+				txtRefSolicitud = rset.getInt("refSolicitud");
+				txtSueloSolicitud = rset.getString("sueloSolicitud");
+				txtTipoSolicitud = rset.getString("tipoSolicitud");
+				txtFechaSolicitud = rset.getString("fechaSolicitud");
+				txtFechaIniSolicitud = rset.getString("fechaIniSolicitud");
+				comboBoxEstado = rset.getString("estadoSolicitud");
+				txtFtoDniSolicitud = rset.getInt("ftoDniSolicitud");
+				txtFtoActSolicitud = rset.getInt("ftoActSolicitud");
+				txtFtoEscriSolicitud = rset.getInt("ftoEscriSolicitud");
+				txtJustPagoSolicitud = rset.getInt("justPagoSolicitud");
+				txtMemActSolicitud = rset.getInt("memActSolicitud");
+				txtPlanosSolicitud = rset.getInt("planosSolicitud");
+				txtAutoSolicitud = rset.getInt("autoSolicitud");
+				txtLicObraSolicitud = rset.getInt("licObraSolicitud");
+				txtCertColegSolicitud = rset.getInt("certColegSolicitud");
 
 				z += 1;
 			}
@@ -503,10 +525,6 @@ public class Modelo {
 		return txtMunicipioRepre;
 	}
 
-	public String getTxtMailRepre() {
-		return txtMailRepre;
-	}
-
 	public int getTxtDni() {
 		return txtDni;
 	}
@@ -515,8 +533,98 @@ public class Modelo {
 		return txtNombre;
 	}
 
-	public int getTxtReferencia() {
-		return txtReferencia;
+	public String getUrl() {
+		return url;
+	}
+
+	public String getUsuario() {
+		return usuario;
+	}
+
+	public String getTxtDescSolicitud() {
+		return txtDescSolicitud;
+	}
+
+	public int getTxtRefSolicitud() {
+		return txtRefSolicitud;
+	}
+
+	public String getTxtSueloSolicitud() {
+		return txtSueloSolicitud;
+	}
+
+	public String getTxtTipoSolicitud() {
+		return txtTipoSolicitud;
+	}
+	
+	public String getTxtcomboBoxEstado() {
+		return comboBoxEstado;
+	}
+
+	public java.util.Date getTxtFechaSolicitud()  {
+		java.util.Date d = null;
+		try {
+			d = (parsearFechaSQL(txtFechaSolicitud));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return d;
+	
+	}
+	public java.util.Date getTxtFechaIniSolicitud()  {
+		java.util.Date d=null;
+		try {
+			d = (parsearFechaSQL(txtFechaIniSolicitud));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return d;
+	
+	}
+	public java.util.Date parsearFechaSQL(String fechaString) throws ParseException{
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        java.util.Date utilDate = sdf.parse(fechaString);
+        return utilDate;
+}
+
+	
+	public int getTxtFtoDniSolicitud() {
+		return txtFtoDniSolicitud;
+	}
+
+	public int getTxtFtoActSolicitud() {
+		return txtFtoActSolicitud;
+	}
+
+	public int getTxtFtoEscriSolicitud() {
+		return txtFtoEscriSolicitud;
+	}
+
+	public int getTxtJustPagoSolicitud() {
+		return txtJustPagoSolicitud;
+	}
+
+	public int getTxtMemActSolicitud() {
+		return txtMemActSolicitud;
+	}
+
+	public int getTxtPlanosSolicitud() {
+		return txtPlanosSolicitud;
+	}
+
+	public int getTxtAutoSolicitud() {
+		return txtAutoSolicitud;
+	}
+
+	public int getTxtLicObraSolicitud() {
+		return txtLicObraSolicitud;
+	}
+
+	public int getTxtCertColegSolicitud() {
+		return txtCertColegSolicitud;
 	}
 
 	public void setEstado(String estado) {
