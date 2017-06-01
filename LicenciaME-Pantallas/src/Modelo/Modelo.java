@@ -188,7 +188,7 @@ public class Modelo {
 				ShowJTable();
 
 			} else {
-				JOptionPane.showMessageDialog(null, "La información no pudo ser almacenada");
+				JOptionPane.showMessageDialog(null, "La informaciï¿½n no pudo ser almacenada");
 			}
 		} catch (Exception ex) {
 			// TODO: handle exception
@@ -209,7 +209,7 @@ public class Modelo {
 			ps.setInt(1, DNI);
 			ps.setString(2, nombre);
 			ps.setString(3, direccion);
-			ps.setString(4, municipio);
+			ps.setString(4, municipio);	
 			ps.setString(5, cp);
 			ps.setString(6, fijo);
 			ps.setString(7, movil);
@@ -231,7 +231,7 @@ public class Modelo {
 				ShowJTable();
 
 			} else {
-				JOptionPane.showMessageDialog(null, "La información no pudo ser almacenada");
+				JOptionPane.showMessageDialog(null, "La informaciï¿½n no pudo ser almacenada");
 			}
 		} catch (Exception ex) {
 			// TODO: handle exception
@@ -296,7 +296,7 @@ public class Modelo {
 				ShowJTable();
 
 			} else {
-				JOptionPane.showMessageDialog(null, "La información no pudo ser almacenada");
+				JOptionPane.showMessageDialog(null, "La informaciï¿½n no pudo ser almacenada");
 			}
 		} catch (Exception ex) {
 			// TODO: handle exception
@@ -321,9 +321,9 @@ public class Modelo {
 				model.setRowCount(0);
 				ShowJTable();
 				vistaInscripcion.dispose();
-				JOptionPane.showMessageDialog(null, "Información almacenada satisfactoriamente");
+				JOptionPane.showMessageDialog(null, "Informaciï¿½n almacenada satisfactoriamente");
 			} else {
-				JOptionPane.showMessageDialog(null, "La información no pudo ser almacenada");
+				JOptionPane.showMessageDialog(null, "La informaciï¿½n no pudo ser almacenada");
 			}
 		} catch (Exception ex) {
 			// TODO: handle exception
@@ -349,9 +349,9 @@ public class Modelo {
 				model.setRowCount(0);
 				ShowJTable();
 				vistaInscripcion.dispose();
-				JOptionPane.showMessageDialog(null, "Información almacenada satisfactoriamente");
+				JOptionPane.showMessageDialog(null, "Informaciï¿½n almacenada satisfactoriamente");
 			} else {
-				JOptionPane.showMessageDialog(null, "La información no pudo ser almacenada");
+				JOptionPane.showMessageDialog(null, "La informaciï¿½n no pudo ser almacenada");
 			}
 		} catch (Exception ex) {
 			// TODO: handle exception
@@ -442,6 +442,7 @@ public class Modelo {
 
 			int z = 0;
 			while (rset.next()) {
+				txtDescSolicitudP = rset.getString("descSolicitud");
 				txtFechaSolicitudP = rset.getString("fechaSolicitud");
 				txtFechaIniSolicitudP = rset.getString("fechaIniSolicitud");
 				txtFtoDniSolicitudP = rset.getInt("ftoDniSolicitud");
@@ -456,7 +457,8 @@ public class Modelo {
 				
 				z += 1;
 			}
-
+			
+			
 		} catch (SQLException s) {
 			s.printStackTrace();
 		}
@@ -490,17 +492,11 @@ public class Modelo {
 		this.txtDescSolicitudP = txtDescSolicitudP;
 	}
 
-	public String getTxtFechaSolicitudP() {
-		return txtFechaSolicitudP;
-	}
 
 	public void setTxtFechaSolicitudP(String txtFechaSolicitudP) {
 		this.txtFechaSolicitudP = txtFechaSolicitudP;
 	}
 
-	public String getTxtFechaIniSolicitudP() {
-		return txtFechaIniSolicitudP;
-	}
 
 	public void setTxtFechaIniSolicitudP(String txtFechaIniSolicitudP) {
 		this.txtFechaIniSolicitudP = txtFechaIniSolicitudP;
@@ -733,7 +729,41 @@ public class Modelo {
 		return d;
 	
 	}
+	
+	public java.util.Date getTxtFechaSolicitudP()  {
+		java.util.Date r = null;
+		try {
+			r = (parsearFechaSQLP(txtFechaSolicitudP));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("gola1");
+		}
+		System.out.println("r: "+r);
+		return r;
+	
+	}
+	public java.util.Date getTxtFechaIniSolicitudP()  {
+		java.util.Date r = null;
+		try {
+			r = (parsearFechaSQLP(txtFechaSolicitudP));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("gola1");
+		}
+		System.out.println("r: "+r);
+		return r;
+	
+	}
+	
+	
 	public java.util.Date parsearFechaSQL(String fechaString) throws ParseException{
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        java.util.Date utilDate = sdf.parse(fechaString);
+        return utilDate;
+}
+	public java.util.Date parsearFechaSQLP(String fechaString) throws ParseException{
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         java.util.Date utilDate = sdf.parse(fechaString);
         return utilDate;

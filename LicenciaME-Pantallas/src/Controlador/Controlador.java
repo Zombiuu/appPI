@@ -22,6 +22,7 @@ public class Controlador {
 	private VistaConfiguracion vistaConfiguracion;
 	private VistaModificacion vistaModificacion;
 	private int nRegistro;
+	private int nRegistro2;
 
 	private int ultimaSolicitud;
 	private int ultimaPersona;
@@ -127,12 +128,12 @@ public class Controlador {
 			return modelo.inertPersona(vistaInscripcion.getTxtNombre(), Integer.parseInt(vistaInscripcion.getTxtDNI()),
 					vistaInscripcion.getTxtDireccion(), vistaInscripcion.getTxtMunicipio(), vistaInscripcion.getTxtCp(),
 					vistaInscripcion.getTxtFax(), vistaInscripcion.getTxtMovil(), vistaInscripcion.getTxtMail(),
-					"Física");
+					"Fisica");
 		} else {
 			return modelo.inertPersona(vistaInscripcion.getTxtNombre(), Integer.parseInt(vistaInscripcion.getTxtDNI()),
 					vistaInscripcion.getTxtDireccion(), vistaInscripcion.getTxtMunicipio(), vistaInscripcion.getTxtCp(),
 					vistaInscripcion.getTxtFax(), vistaInscripcion.getTxtMovil(), vistaInscripcion.getTxtMail(),
-					"Jurídica");
+					"Juridica");
 
 		}
 		
@@ -190,9 +191,9 @@ public class Controlador {
 
 	public void mostrarDatosAdicionales(){
 		
-		nRegistro=Integer.parseInt(String.valueOf(vistaPrincipal.getTablaInfo2().getValueAt(vistaPrincipal.getTablaInfo2().getSelectedRow(),0)));
+		nRegistro2=Integer.parseInt(String.valueOf(vistaPrincipal.getTablaInfo2().getValueAt(vistaPrincipal.getTablaInfo2().getSelectedRow(),0)));
 
-		modelo.datosAdicionales(nRegistro);
+		modelo.datosAdicionales(nRegistro2);
 		
 	}
 
