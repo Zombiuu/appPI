@@ -188,7 +188,13 @@ public class Controlador {
 		modelo.datosModificacion(nRegistro);
 		}
 
-	
+	public void mostrarDatosAdicionales(){
+		
+		nRegistro=Integer.parseInt(String.valueOf(vistaPrincipal.getTablaInfo2().getValueAt(vistaPrincipal.getTablaInfo2().getSelectedRow(),0)));
+
+		modelo.datosAdicionales(nRegistro);
+		
+	}
 
 	public void enableComponents(Container container, boolean enable) {
 		Component[] components = container.getComponents();

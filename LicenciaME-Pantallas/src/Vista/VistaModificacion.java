@@ -245,7 +245,7 @@ public class VistaModificacion extends JFrame {
 						JLabel lblDescrAct = new JLabel("Descripci\u00F3n de la actividad");
 										
 												JLabel lblTipo = new JLabel("Tipo Actividad");
-												comboTipo.setModel(new DefaultComboBoxModel(new String[] {"Seleccione Tipo", "Suelo calificado como industrial", "Suelo urbano", "Casa de ahorro, bancos", "Compa\u00F1ias de seguros", "Bares, Cafetrias, Restaurantes", "Salones recreativos", "Establecimientos Alimentarios", "Hoteles, Hostales, Pensiones", "Terrazas de verano", "Gasolineras, Depositos combustible"}));
+												comboTipo.setModel(new DefaultComboBoxModel(new String[] {"Seleccione Tipo", "Suelo calificado como industrial", "Suelo urbano", "Casa de ahorro, bancos", "Companias de seguros", "Bares, Cafetrias, Restaurantes", "Salones recreativos", "Establecimientos Alimentarios", "Hoteles, Hostales, Pensiones", "Terrazas de verano", "Gasolineras, Depositos combustible"}));
 												
 												JLabel lblReferenciaCatastral = new JLabel("Referencia Catastral");
 												
@@ -255,7 +255,7 @@ public class VistaModificacion extends JFrame {
 												JLabel lblTipoSuelo = new JLabel("Tipo Suelo");
 												
 												comboSuelo = new JComboBox();
-												comboSuelo.setModel(new DefaultComboBoxModel(new String[] {"Seleccione Tipo", "Urbano", "R\u00FAstico"}));
+												comboSuelo.setModel(new DefaultComboBoxModel(new String[] {"Seleccione Tipo", "Urbano", "Rustico"}));
 												GroupLayout gl_panelLocal = new GroupLayout(panelLocal);
 												gl_panelLocal.setHorizontalGroup(
 													gl_panelLocal.createParallelGroup(Alignment.LEADING)

@@ -54,6 +54,15 @@ public class VistaPrincipal extends JFrame {
 	private TableRowSorter trOrden;
 	private JComboBox tipo;
 	private JComboBox comboBox;
+	private JDateChooser fechaSolicitudP;
+	private JDateChooser fechaInicioSolicitudP;
+	private JCheckBox checkBoxFtoImpActP;
+	private JCheckBox chckbxOtrasAutorizacionesP;
+	private JCheckBox chckbxFotoDniP;
+	private JCheckBox chckbxJustificanteDePagoP;
+	private JCheckBox chckbxFotocopiaEscriturasP;
+	private JLabel lblDescripcionP;
+
 	/**
 	 * Create the frame.
 	 */
@@ -98,23 +107,23 @@ public class VistaPrincipal extends JFrame {
 		JLabel lblDocumentacinAportada = new JLabel("Documentaci\u00F3n aportada");
 		lblDocumentacinAportada.setFont(new Font("Tahoma", Font.BOLD, 11));
 
-		JCheckBox chckbxFotoDniP = new JCheckBox("Fotocopia DNI / CIF / NIE");
+		chckbxFotoDniP = new JCheckBox("Fotocopia DNI / CIF / NIE");
 		chckbxFotoDniP.setBackground(SystemColor.inactiveCaption);
 		chckbxFotoDniP.setFont(new Font("Tahoma", Font.PLAIN, 11));
 
-		JCheckBox chckbxOtrasAutorizacionesP = new JCheckBox("Otras Autorizaciones");
+		chckbxOtrasAutorizacionesP = new JCheckBox("Otras Autorizaciones");
 		chckbxOtrasAutorizacionesP.setBackground(SystemColor.inactiveCaption);
 		chckbxOtrasAutorizacionesP.setFont(new Font("Tahoma", Font.PLAIN, 11));
 
-		JCheckBox checkBoxFtoImpActP = new JCheckBox("Fotocopia impuesto de Actividades (Modelo 36)");
+		checkBoxFtoImpActP = new JCheckBox("Fotocopia impuesto de Actividades (Modelo 36)");
 		checkBoxFtoImpActP.setBackground(SystemColor.inactiveCaption);
 		checkBoxFtoImpActP.setFont(new Font("Tahoma", Font.PLAIN, 11));
 
-		JCheckBox chckbxFotocopiaEscriturasP = new JCheckBox("Fotocopia Escrituras");
+		chckbxFotocopiaEscriturasP = new JCheckBox("Fotocopia Escrituras");
 		chckbxFotocopiaEscriturasP.setBackground(SystemColor.inactiveCaption);
 		chckbxFotocopiaEscriturasP.setFont(new Font("Tahoma", Font.PLAIN, 11));
 
-		JCheckBox chckbxJustificanteDePagoP = new JCheckBox("Justificante de Pago");
+		chckbxJustificanteDePagoP = new JCheckBox("Justificante de Pago");
 		chckbxJustificanteDePagoP.setBackground(SystemColor.inactiveCaption);
 		chckbxJustificanteDePagoP.setFont(new Font("Tahoma", Font.PLAIN, 11));
 
@@ -125,18 +134,18 @@ public class VistaPrincipal extends JFrame {
 
 		JSeparator separator_1 = new JSeparator();
 
-		JDateChooser fechaSolicitudP = new JDateChooser();
+		fechaSolicitudP = new JDateChooser();
 		fechaSolicitudP.setDateFormatString("dd-MM-yyyy");
 		fechaSolicitudP.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 
 		JLabel lblFechaPrevistaActividad = new JLabel("Fecha prevista actividad");
 		lblFechaPrevistaActividad.setFont(new Font("Tahoma", Font.PLAIN, 11));
 
-		JDateChooser fechaInicioSolicitudP = new JDateChooser();
+		fechaInicioSolicitudP = new JDateChooser();
 		fechaInicioSolicitudP.setDateFormatString("dd-MM-yyyy");
 		fechaInicioSolicitudP.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 
-		JLabel lblDescripcionP = new JLabel("New label");
+		lblDescripcionP = new JLabel("New label");
 
 		JLabel lblNewLabel_4 = new JLabel("Informaci\u00F3n adicional");
 		lblNewLabel_4.setFont(new Font("Tahoma", Font.BOLD, 18));
@@ -144,8 +153,10 @@ public class VistaPrincipal extends JFrame {
 		gl_Descripcion
 				.setHorizontalGroup(gl_Descripcion.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_Descripcion.createSequentialGroup().addContainerGap().addGroup(gl_Descripcion
-								.createParallelGroup(Alignment.LEADING).addGroup(gl_Descripcion.createSequentialGroup()
-										.addComponent(lblNewLabel_4, GroupLayout.DEFAULT_SIZE, 437,
+								.createParallelGroup(Alignment.LEADING).addGroup(gl_Descripcion
+										.createSequentialGroup()
+										.addComponent(
+												lblNewLabel_4, GroupLayout.DEFAULT_SIZE, 437,
 												Short.MAX_VALUE)
 										.addContainerGap())
 								.addGroup(
@@ -168,7 +179,8 @@ public class VistaPrincipal extends JFrame {
 														.addPreferredGap(ComponentPlacement.RELATED).addComponent(
 																chckbxJustificanteDePagoP, GroupLayout.DEFAULT_SIZE,
 																GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-												.addComponent(checkBoxFtoImpActP, GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE))
+												.addComponent(checkBoxFtoImpActP, GroupLayout.DEFAULT_SIZE, 270,
+														Short.MAX_VALUE))
 												.addPreferredGap(ComponentPlacement.RELATED)
 												.addGroup(gl_Descripcion.createParallelGroup(Alignment.LEADING, false)
 														.addComponent(chckbxFotocopiaEscriturasP,
@@ -184,8 +196,8 @@ public class VistaPrincipal extends JFrame {
 																GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE))
 												.addGroup(gl_Descripcion.createParallelGroup(Alignment.LEADING)
 														.addGroup(gl_Descripcion.createSequentialGroup().addGap(18)
-																.addComponent(fechaInicioSolicitudP, GroupLayout.DEFAULT_SIZE,
-																		162, Short.MAX_VALUE)
+																.addComponent(fechaInicioSolicitudP,
+																		GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
 																.addGap(94))
 														.addGroup(gl_Descripcion.createSequentialGroup().addGap(21)
 																.addComponent(lblFechaPrevistaActividad,
@@ -214,12 +226,11 @@ public class VistaPrincipal extends JFrame {
 						.addComponent(chckbxFotocopiaEscriturasP, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,
 								Short.MAX_VALUE))
 				.addPreferredGap(ComponentPlacement.RELATED)
-				.addGroup(
-						gl_Descripcion.createParallelGroup(Alignment.BASELINE)
-								.addComponent(checkBoxFtoImpActP, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,
-										Short.MAX_VALUE)
-								.addComponent(chckbxOtrasAutorizacionesP, GroupLayout.DEFAULT_SIZE,
-										GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+				.addGroup(gl_Descripcion.createParallelGroup(Alignment.BASELINE)
+						.addComponent(checkBoxFtoImpActP, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,
+								Short.MAX_VALUE)
+						.addComponent(chckbxOtrasAutorizacionesP, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,
+								Short.MAX_VALUE))
 				.addGap(9)
 				.addComponent(separator, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
 						GroupLayout.PREFERRED_SIZE)
@@ -312,10 +323,13 @@ public class VistaPrincipal extends JFrame {
 					controlador.abrirVentanaModificacion();
 					DefaultTableModel model = (DefaultTableModel) TablaInfo.getModel();
 					int selectedRowIndex = TablaInfo.getSelectedRow();
-					
+
 					controlador.recogerRegistroCambio();
 
 					btnArchivar.setEnabled(true);
+				} else if (e.getClickCount() == 1) {
+
+					controlador.mostrarDatosAdicionales();
 				}
 			}
 		});
@@ -338,8 +352,7 @@ public class VistaPrincipal extends JFrame {
 		btnReset.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				controlador.reiniciarJTable(TablaInfo);
-				
-				
+
 			}
 		});
 		btnReset.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -351,34 +364,27 @@ public class VistaPrincipal extends JFrame {
 		JLabel lblNewLabel_3 = new JLabel("Buscador");
 		lblNewLabel_3.setFont(new Font("Tahoma", Font.BOLD, 18));
 		GroupLayout gl_Main = new GroupLayout(Main);
-		gl_Main.setHorizontalGroup(
-			gl_Main.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, gl_Main.createSequentialGroup()
-					.addContainerGap(18, Short.MAX_VALUE)
-					.addGroup(gl_Main.createParallelGroup(Alignment.LEADING)
-						.addComponent(lblNewLabel_3)
-						.addGroup(gl_Main.createParallelGroup(Alignment.TRAILING, false)
-							.addComponent(panelLicencia, GroupLayout.PREFERRED_SIZE, 738, GroupLayout.PREFERRED_SIZE)
-							.addGroup(gl_Main.createSequentialGroup()
-								.addComponent(btnBusqueda, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+		gl_Main.setHorizontalGroup(gl_Main.createParallelGroup(Alignment.LEADING).addGroup(Alignment.TRAILING, gl_Main
+				.createSequentialGroup().addContainerGap(18, Short.MAX_VALUE)
+				.addGroup(gl_Main.createParallelGroup(Alignment.LEADING).addComponent(lblNewLabel_3).addGroup(gl_Main
+						.createParallelGroup(Alignment.TRAILING, false)
+						.addComponent(panelLicencia, GroupLayout.PREFERRED_SIZE, 738, GroupLayout.PREFERRED_SIZE)
+						.addGroup(gl_Main.createSequentialGroup()
+								.addComponent(btnBusqueda, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,
+										Short.MAX_VALUE)
 								.addPreferredGap(ComponentPlacement.RELATED)
 								.addComponent(btnReset, GroupLayout.PREFERRED_SIZE, 153, GroupLayout.PREFERRED_SIZE)
 								.addGap(497))))
-					.addGap(28))
-		);
-		gl_Main.setVerticalGroup(
-			gl_Main.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_Main.createSequentialGroup()
-					.addGap(19)
-					.addComponent(lblNewLabel_3)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(panelLicencia, GroupLayout.PREFERRED_SIZE, 168, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_Main.createParallelGroup(Alignment.BASELINE)
+				.addGap(28)));
+		gl_Main.setVerticalGroup(gl_Main.createParallelGroup(Alignment.TRAILING).addGroup(gl_Main
+				.createSequentialGroup().addGap(19).addComponent(lblNewLabel_3)
+				.addPreferredGap(ComponentPlacement.UNRELATED)
+				.addComponent(panelLicencia, GroupLayout.PREFERRED_SIZE, 168, GroupLayout.PREFERRED_SIZE)
+				.addPreferredGap(ComponentPlacement.RELATED)
+				.addGroup(gl_Main.createParallelGroup(Alignment.BASELINE)
 						.addComponent(btnBusqueda, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 						.addComponent(btnReset, GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE))
-					.addContainerGap())
-		);
+				.addContainerGap()));
 
 		JLabel tipoLabel = new JLabel("Tipo de Licencia");
 		tipoLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -419,11 +425,8 @@ public class VistaPrincipal extends JFrame {
 				TablaInfo.setRowSorter(trOrden);
 			}
 		});
-		
-		tipo.setModel(new DefaultComboBoxModel(new String[] { "Seleccione Tipo", "Suelo calificado como industrial",
-				"Suelo urbano", "Casa de ahorro, bancos", "Compañias de seguros", "Bares, Cafetrias, Restaurantes",
-				"Salones recreativos", "Establecimientos Alimentarios", "Hoteles, Hostales, Pensiones",
-				"Terrazas de verano", "Gasolineras, Depositos combustible" }));
+
+		tipo.setModel(new DefaultComboBoxModel(new String[] {"Seleccione Tipo", "Suelo calificado como industrial", "Suelo urbano", "Casa de ahorro, bancos", "Companias de seguros", "Bares, Cafetrias, Restaurantes", "Salones recreativos", "Establecimientos Alimentarios", "Hoteles, Hostales, Pensiones", "Terrazas de verano", "Gasolineras, Depositos combustible"}));
 		tipo.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
 		comboBox = new JComboBox();
@@ -524,29 +527,30 @@ public class VistaPrincipal extends JFrame {
 		trOrden.setRowFilter(RowFilter.regexFilter(txtnRegistro.getText(), 0));
 
 	}
-	
+
 	public void filtroDNI() {
 		trOrden.setRowFilter(RowFilter.regexFilter(txtDNI.getText(), 1));
 
 	}
-	
+
 	public void filtroTipo() {
 		trOrden.setRowFilter(RowFilter.regexFilter(tipo.getSelectedItem().toString(), 3));
 
 	}
-	
+
 	public void filtroEstado() {
 		trOrden.setRowFilter(RowFilter.regexFilter(comboBox.getSelectedItem().toString(), 5));
-		
+
 	}
 
 	public void onLoadTable() {
 		controlador.MostrarTabla();
 	}
-	
+
 	public TableModel getTablaInfo() {
 		return TablaInfo.getModel();
 	}
+
 	public JTable getTablaInfo2() {
 		return TablaInfo;
 	}
@@ -557,5 +561,30 @@ public class VistaPrincipal extends JFrame {
 
 	public void setModelo(Modelo modelo) {
 		this.modelo = modelo;
+	}
+
+	public void datosAdicionales() {
+
+		// Solucitud
+		lblDescripcionP.setText(modelo.getTxtDescSolicitudP());
+		fechaSolicitudP.setDate(modelo.getTxtFechaSolicitud());
+		fechaInicioSolicitudP.setDate(modelo.getTxtFechaIniSolicitud());
+
+		if (modelo.getTxtFtoActSolicitudP() == 1) {
+			checkBoxFtoImpActP.setSelected(true);
+		}
+		if (modelo.getTxtFtoDniSolicitudP() == 1) {
+			chckbxFotoDniP.setSelected(true);
+		}
+		if (modelo.getTxtFtoEscriSolicitudP() == 1) {
+			chckbxFotocopiaEscriturasP.setSelected(true);
+		}
+		if (modelo.getTxtJustPagoSolicitudP() == 1) {
+			chckbxJustificanteDePagoP.setSelected(true);
+		}
+		if (modelo.getTxtAutoSolicitudP() == 1) {
+			chckbxOtrasAutorizacionesP.setSelected(true);
+		}
+
 	}
 }

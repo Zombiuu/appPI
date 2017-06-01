@@ -74,6 +74,20 @@ public class Modelo {
 	private int txtAutoSolicitud;
 	private int txtLicObraSolicitud;
 	private int txtCertColegSolicitud;
+	//variables solicitud vistaPrincipal
+	private String txtDescSolicitudP;
+	private String txtFechaSolicitudP;
+	private String txtFechaIniSolicitudP;
+	private int txtFtoDniSolicitudP;
+	private int txtFtoActSolicitudP;
+	private int txtFtoEscriSolicitudP;
+	private int txtJustPagoSolicitudP;
+	private int txtMemActSolicitudP;
+	private int txtPlanosSolicitudP;
+	private int txtAutoSolicitudP;
+	private int txtLicObraSolicitudP;
+	private int txtCertColegSolicitudP;
+	
 
 	public Modelo() {
 		super();
@@ -294,7 +308,7 @@ public class Modelo {
 
 	public void insertarTablaPersonaRepre(int idPersona, int idRepre) {
 		Connection con = getConnection();
-		String query = "INSERT INTO `representa` ( `persona`, `representante`) VALUES ( ?,? );";
+		String query = "INSERT INTO `representa` ( `persona`, `representante`) VALUES ( ?,? )";
 		PreparedStatement ps;
 
 		try {
@@ -320,7 +334,7 @@ public class Modelo {
 
 	public void insertarTablaPersonaSolicitud(int idPersona, int idAct, String fechaSolicitud) {
 		Connection con = getConnection();
-		String query = "INSERT INTO `titularidad` (`persona`, `solicitud`, `fecha_inicio`, `fecha_fin`) VALUES ( ?,?,?,? );";
+		String query = "INSERT INTO `titularidad` (`persona`, `solicitud`, `fecha_inicio`, `fecha_fin`) VALUES ( ?,?,?,? )";
 		PreparedStatement ps;
 
 		try {
@@ -355,7 +369,7 @@ public class Modelo {
 				System.exit(-1);
 			}
 			PreparedStatement ps = con.prepareStatement(
-					"SELECT persona.cif as cifPersona,persona.direccion as direccionPersona,persona.municipio as municipioPersona,persona.cp as cpPersona,solicitud.estado as estadoSolicitud,persona.tlf_fijo as fijoPersona,persona.tlf_movil as movilPersona,persona.nombre as nombrePersona,persona.email as emailPersona,representante.nif_nie as nifRepre,representante.direccion as direccionRepre,representante.municipio as municipioRepre,representante.cp as cpRepre,representante.tlf_fijo as fijoRepre,representante.tlf_movil as movilRepre,representante.nombre as nombreRepre,solicitud.desc_actividad as descSolicitud,solicitud.ref_catastral as refSolicitud,solicitud.tipo_suelo as sueloSolicitud,solicitud.tipo as tipoSolicitud,solicitud.fecha as fechaSolicitud,solicitud.fecha_inicio as fechaIniSolicitud,solicitud.fotocopia_dni as ftoDniSolicitud,solicitud.fotocopia_imp_actividades as ftoActSolicitud,solicitud.fotocopia_escritura as ftoEscriSolicitud,solicitud.justificante_pago as justPagoSolicitud,solicitud.memoria_actividad as memActSolicitud,solicitud.planos as planosSolicitud,solicitud.otras_autorizaciones as autoSolicitud,solicitud.licencia_obra as licObraSolicitud,solicitud.certificado_colegio_oficial as certColegSolicitud FROM persona JOIN titularidad ON persona.id_persona = titularidad.persona JOIN solicitud ON titularidad.solicitud = solicitud.id_solicitud LEFT JOIN representa ON persona.id_persona = representa.persona LEFT JOIN representante ON representante.id_representante = representa.representante WHERE solicitud.id_solicitud = ?");
+					"SELECT persona.cif as cifPersona,persona.direccion as direccionPersona,persona.municipio as municipioPersona,persona.cp as cpPersona,solicitud.estado as estadoSolicitud,persona.tlf_fijo as fijoPersona,persona.tlf_movil as movilPersona,persona.nombre as nombrePersona,persona.email as emailPersona,representante.nif_nie as nifRepre,representante.direccion as direccionRepre,representante.municipio as municipioRepre,representante.cp as cpRepre,representante.tlf_fijo as fijoRepre,representante.tlf_movil as movilRepre,representante.nombre as nombreRepre,solicitud.desc_actividad as descSolicitud,solicitud.ref_catastral as refSolicitud,solicitud.tipo_suelo as sueloSolicitud,solicitud.tipo as tipoSolicitud,solicitud.fecha as fechaSolicitud,solicitud.fecha_inicio as fechaIniSolicitud,solicitud.fotocopia_dni as ftoDniSolicitud,solicitud.fotocopia_imp_actividades as ftoActSolicitud,solicitud.fotocopia_escritura as ftoEscriSolicitud,solicitud.justificante_pago as justPagoSolicitud,solicitud.memoria_actividad as memActSolicitud,solicitud.planos as planosSolicitud,solicitud.otras_autorizaciones as autoSolicitud,solicitud.licencia_obra as licObraSolicitud,solicitud.certificado_colegio_oficial as certColegSolicitud, solicitud.estado as estado FROM persona JOIN titularidad ON persona.id_persona = titularidad.persona JOIN solicitud ON titularidad.solicitud = solicitud.id_solicitud LEFT JOIN representa ON persona.id_persona = representa.persona LEFT JOIN representante ON representante.id_representante = representa.representante WHERE solicitud.id_solicitud = ?");
 
 			ps.setInt(1, nRegistro);
 			ResultSet rset = ps.executeQuery();
@@ -412,6 +426,45 @@ public class Modelo {
 	 * Mostrar Tabla
 	 */
 
+	public void datosAdicionales(int nRegistro){
+		
+		try {
+			Connection con = getConnection();
+			if (con == null) {
+
+				System.exit(-1);
+			}
+			PreparedStatement ps = con.prepareStatement(
+					"SELECT solicitud.desc_actividad as descSolicitud,solicitud.fecha as fechaSolicitud,solicitud.fecha_inicio as fechaIniSolicitud,solicitud.fotocopia_dni as ftoDniSolicitud,solicitud.fotocopia_imp_actividades as ftoActSolicitud,solicitud.fotocopia_escritura as ftoEscriSolicitud,solicitud.justificante_pago as justPagoSolicitud,solicitud.memoria_actividad as memActSolicitud,solicitud.planos as planosSolicitud,solicitud.otras_autorizaciones as autoSolicitud,solicitud.licencia_obra as licObraSolicitud,solicitud.certificado_colegio_oficial as certColegSolicitud FROM persona JOIN titularidad ON persona.id_persona = titularidad.persona JOIN solicitud ON titularidad.solicitud = solicitud.id_solicitud LEFT JOIN representa ON persona.id_persona = representa.persona LEFT JOIN representante ON representante.id_representante = representa.representante WHERE solicitud.id_solicitud = ?");
+
+			ps.setInt(1, nRegistro);
+			ResultSet rset = ps.executeQuery();
+
+			int z = 0;
+			while (rset.next()) {
+				txtFechaSolicitudP = rset.getString("fechaSolicitud");
+				txtFechaIniSolicitudP = rset.getString("fechaIniSolicitud");
+				txtFtoDniSolicitudP = rset.getInt("ftoDniSolicitud");
+				txtFtoActSolicitudP = rset.getInt("ftoActSolicitud");
+				txtFtoEscriSolicitudP = rset.getInt("ftoEscriSolicitud");
+				txtJustPagoSolicitudP = rset.getInt("justPagoSolicitud");
+				txtMemActSolicitudP = rset.getInt("memActSolicitud");
+				txtPlanosSolicitudP = rset.getInt("planosSolicitud");
+				txtAutoSolicitudP = rset.getInt("autoSolicitud");
+				txtLicObraSolicitudP = rset.getInt("licObraSolicitud");
+				txtCertColegSolicitudP = rset.getInt("certColegSolicitud");
+				
+				z += 1;
+			}
+
+		} catch (SQLException s) {
+			s.printStackTrace();
+		}
+		vistaPrincipal.datosAdicionales();
+	}
+	
+	
+
 	public void ShowJTable() {
 		ArrayList<Modelo> list = getInscripcionesList();
 		DefaultTableModel model = (DefaultTableModel) vistaPrincipal.getTablaInfo();
@@ -427,6 +480,102 @@ public class Modelo {
 
 			model.addRow(row);
 		}
+	}
+	
+	public String getTxtDescSolicitudP() {
+		return txtDescSolicitudP;
+	}
+
+	public void setTxtDescSolicitudP(String txtDescSolicitudP) {
+		this.txtDescSolicitudP = txtDescSolicitudP;
+	}
+
+	public String getTxtFechaSolicitudP() {
+		return txtFechaSolicitudP;
+	}
+
+	public void setTxtFechaSolicitudP(String txtFechaSolicitudP) {
+		this.txtFechaSolicitudP = txtFechaSolicitudP;
+	}
+
+	public String getTxtFechaIniSolicitudP() {
+		return txtFechaIniSolicitudP;
+	}
+
+	public void setTxtFechaIniSolicitudP(String txtFechaIniSolicitudP) {
+		this.txtFechaIniSolicitudP = txtFechaIniSolicitudP;
+	}
+
+	public int getTxtFtoDniSolicitudP() {
+		return txtFtoDniSolicitudP;
+	}
+
+	public void setTxtFtoDniSolicitudP(int txtFtoDniSolicitudP) {
+		this.txtFtoDniSolicitudP = txtFtoDniSolicitudP;
+	}
+
+	public int getTxtFtoActSolicitudP() {
+		return txtFtoActSolicitudP;
+	}
+
+	public void setTxtFtoActSolicitudP(int txtFtoActSolicitudP) {
+		this.txtFtoActSolicitudP = txtFtoActSolicitudP;
+	}
+
+	public int getTxtFtoEscriSolicitudP() {
+		return txtFtoEscriSolicitudP;
+	}
+
+	public void setTxtFtoEscriSolicitudP(int txtFtoEscriSolicitudP) {
+		this.txtFtoEscriSolicitudP = txtFtoEscriSolicitudP;
+	}
+
+	public int getTxtJustPagoSolicitudP() {
+		return txtJustPagoSolicitudP;
+	}
+
+	public void setTxtJustPagoSolicitudP(int txtJustPagoSolicitudP) {
+		this.txtJustPagoSolicitudP = txtJustPagoSolicitudP;
+	}
+
+	public int getTxtMemActSolicitudP() {
+		return txtMemActSolicitudP;
+	}
+
+	public void setTxtMemActSolicitudP(int txtMemActSolicitudP) {
+		this.txtMemActSolicitudP = txtMemActSolicitudP;
+	}
+
+	public int getTxtPlanosSolicitudP() {
+		return txtPlanosSolicitudP;
+	}
+
+	public void setTxtPlanosSolicitudP(int txtPlanosSolicitudP) {
+		this.txtPlanosSolicitudP = txtPlanosSolicitudP;
+	}
+
+	public int getTxtAutoSolicitudP() {
+		return txtAutoSolicitudP;
+	}
+
+	public void setTxtAutoSolicitudP(int txtAutoSolicitudP) {
+		this.txtAutoSolicitudP = txtAutoSolicitudP;
+	}
+
+	public int getTxtLicObraSolicitudP() {
+		return txtLicObraSolicitudP;
+	}
+
+	public void setTxtLicObraSolicitudP(int txtLicObraSolicitudP) {
+		this.txtLicObraSolicitudP = txtLicObraSolicitudP;
+	}
+
+	public int getTxtCertColegSolicitudP() {
+		return txtCertColegSolicitudP;
+	}
+
+	public void setTxtCertColegSolicitudP(int txtCertColegSolicitudP) {
+		this.txtCertColegSolicitudP = txtCertColegSolicitudP;
 	}
 
 	public int getIdAct() {
