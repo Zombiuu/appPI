@@ -30,7 +30,7 @@ public class Controlador {
 	public void setModelo(Modelo modelo) {
 		this.modelo = modelo;
 	}
-
+ 
 	public void setVistaPrincipal(VistaPrincipal vistaPrincipal) {
 		this.vistaPrincipal = vistaPrincipal;
 	}
