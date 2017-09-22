@@ -13,8 +13,6 @@ public class Launch {
 		VistaPrincipal vistaPrincipal = new VistaPrincipal();
 		ModeloIni modeloIni = new ModeloIni();
 		Modelo modelo = new Modelo();
-
-		
 		Controlador controlador = new Controlador();
 
 		controlador.setModelo(modelo);

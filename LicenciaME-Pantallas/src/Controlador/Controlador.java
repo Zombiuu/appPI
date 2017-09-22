@@ -70,7 +70,7 @@ public class Controlador {
 			vistaModificacion.setControlador(this);
 			modelo.setVistaModificacion(vistaModificacion);
 			vistaModificacion.setVisible(true);
-		
+		 
 	}
 	public void cerrarVentanaInscripcion() {
 		vistaInscripcion.dispose();

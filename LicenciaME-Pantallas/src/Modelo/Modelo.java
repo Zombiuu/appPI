@@ -135,7 +135,7 @@ public class Modelo {
 			return con;
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null,
-					"No se pudo conectar con la base de datos, modifique la informaci�n en la configuraci�n");
+					"No se pudo conectar con la base de datos, modifique la informacion en la configuracion");
 			return null;
 			// TODO: handle exception
 		}
